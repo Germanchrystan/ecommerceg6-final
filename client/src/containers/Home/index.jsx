@@ -1,0 +1,140 @@
+import React from "react";
+import { Link } from 'react-router-dom';
+import UniversalNavBar from "../../components/UniversalNavBar/universalNavBar";
+import Carousel from "../../containers/Carousel/carousel"
+import GridHome from "./gridHome"
+import Footer from '../Footer/footer';
+import nike2 from '../../assets/nike2.jpg'
+import zapatillas from '../../assets/zapatillas.jpg'
+import nike from '../../assets/nike.jpg'
+import helly from '../../assets/helly.jpg'
+import image1 from '../../assets/image1.jpg'
+import image2 from '../../assets/image2.jpg'
+import image3 from '../../assets/image3.jpg'
+import image4 from '../../assets/image4.jpg'
+
+export default function Home() {
+
+  return (
+    <div className="tracking-wide font-bold bg-gradient-to-t from-blue-200 to-indigo-900">
+      // {/*  <UniversalNavBar /> */}
+      // {/*   <Carousel productos={[{ id: 1, url: "https://www.hola.com/imagenes/estar-bien/20180312121453/ropa-contamina-medio-ambiente/0-548-821/ropa-medioambiente-t.jpg?filter=w600&filter=ds75" }, { id: 2, url: "https://percentil.com/blog/wp-content/uploads/2019/10/Segunda-mano-1080x720.jpg" }, { id: 3, url: "https://economiasustentable.com/wp-content/uploads/2020/01/ropa.png" }, { id: 4, url: "https://www.manosunidas.org/sites/default/files/styles/full-news-hightlighted/public/exj_ropa_1.jpg?itok=qYz_7Cg-&timestamp=1590663388" }]} /> */}
+      <body className="bg-white f">
+
+        {/* <header className="flex flex-wrap items-center justify-between px-12 h-32 -mb-32 relative"> */}
+        <UniversalNavBar />
+        {/* <ul className="order-last md:order-first flex-1 flex justify-center md:justify-start list-reset">
+            <li>
+              <a href="#" className="text-sm text-grey-darker no-underline hover:text-black">Home</a>
+            </li>
+            <li className="ml-8">
+              <a href="#" className="text-sm text-grey-darker no-underline hover:text-black">About</a>
+            </li>
+            <li className="ml-8">
+              <a href="#" className="text-sm text-grey-darker no-underline hover:text-black">Contact</a>
+            </li>
+          </ul> */}
+
+
+
+
+        {/*   </header> */}
+
+        <div className="w-full flex flex-wrap md:h-screen pt-32 bg-gradient-to-t from-gray-100 to-gray-400">
+          <div className="pt-6 md:pt-0 w-full md:flex-1 md:order-last">
+            <img src={nike2} className="w-full h-64 md:h-full object-cover" />
+          </div>
+          <div class="w-full p-6 pb-12 md:p-12 md:w-5/12 flex justify-center items-center relative">
+            <div class="w-full relative text-center py-12 px-12 md:p-0 md:text-right">
+              <h1 class="text-5xl mb-4">AdaLov Clothes</h1>
+              {/* <h2 class="text-2xl mb-4">Ut vel nunc a est auctor lacinia.</h2> */}
+              <p class="leading-loose tracking-wide text-gray-700">Sport keeps us fit. It keeps you attentive. It unites us. Through sport we can change lives. Whether it's through inspiring athlete stories. Encouraging you to get going.</p>
+              <br />
+              <Link to="/Shop">
+                <a className="justify-center inline-block bg-black text-white px-6 py-3 text-sm hover:bg-gray-800 ">Shop!</a>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="w-full -mt-6 pt-32 pb-24 px-12 text-center bg-black text-white">
+          <h1 className="text-5xl mb-4">New Arrivals</h1>
+          <section className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-20">
+            <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+              <li className="relative">
+                <div className="block overflow-hidden w-full group aspect-w-10 aspect-h-7">
+                  <img src={image1} width="300" height="300" className="object-cover pointer-events-none group-hover:opacity-75" />
+                  <button type="button" className="absolute inset-0">
+                    <span className="sr-only">View details for IMG</span>
+                  </button>
+                </div>
+              </li>
+              <li className="relative">
+                <div className="block overflow-hidden w-full group aspect-w-10 aspect-h-7">
+                  <img src={image2} width="300" height="300" className="object-cover pointer-events-none group-hover:opacity-75" />
+                  <button type="button" className="absolute inset-0">
+                    <span className="sr-only">View details for IMG</span>
+                  </button>
+                </div>
+              </li>
+              <li className="relative">
+                <div className="block overflow-hidden w-full group aspect-w-10 aspect-h-7">
+                  <img src={image3} width="300" height="300" className="object-cover pointer-events-none group-hover:opacity-75" />
+                  <button type="button" className="absolute inset-0">
+                    <span className="sr-only">View details for IMG</span>
+                  </button>
+                </div>
+              </li>
+              <li className="relative">
+                <div className="block overflow-hidden w-full group aspect-w-10 aspect-h-7">
+                  <img src={image4} width="300" height="300" className="object-cover pointer-events-none group-hover:opacity-75" />
+                  <button type="button" className="absolute inset-0">
+                    <span className="sr-only">View details for IMG</span>
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+
+        <div className="py-24 px-12 bg-gradient-to-t from-gray-400 to-gray-100">
+
+          <div className="container mx-auto flex flex-wrap ">
+            <div className="w-full md:w-1/2 md:pr-4 flex flex-wrap mb-12 md:mb-0">
+              <div className="p-2 w-1/2">
+                <img src={zapatillas} className="w-full h-64 object-cover" />
+              </div>
+              <div className="p-2 w-1/2">
+                <img src={nike} className="w-full h-64 object-cover" />
+              </div>
+              <div className="p-2 w-full">
+                <img src={helly} className="w-full h-64 object-cover" />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 md:pl-4">
+              <h2 className="text-4xl mb-10">Develop</h2>
+              <div className="max-w-lg">
+                {/* <p className="mb-6 text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iaculis vulputate tellus. Etiam vel placerat lorem, eget ornare nibh. Ut in commodo magna. Quisque vitae fermentum quam. Mauris venenatis id enim at porta. Etiam molestie lorem non odio hendrerit.</p> */}
+                {/* <p className="mb-6 text-gray-700">At vulputate ligula consequat. Morbi sollicitudin mollis erat, in tempus nisi. Quisque vehicula vitae sem in ornare. Vivamus id odio ligula.</p> */}
+                <p className="mb-10 text-gray-700">Ecommerce Clothes is much more than sports and training clothing. We partner with the best in the industry to develop our apparel. In this way, we offer our followers the sports clothes and styles that best suit their sports needs, without neglecting sustainability.</p>
+                <a href="#" className="inline-block bg-black text-white px-6 py-3 text-sm hover:bg-gray-800">Find out more</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="bg-black text-white text-center text-sm py-12">
+          <p>Copyright Â© 2019 Henry</p>
+        </div> */}
+
+
+
+      </body>
+      <Footer />
+    </div>
+
+  )
+}

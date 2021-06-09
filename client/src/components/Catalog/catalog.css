@@ -1,0 +1,41 @@
+.card {
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: flex;
+  width: 64px;
+  height: 64px;
+  margin-left: 730px;
+  margin-top: 00px;
+  border-radius: 50%;
+  border: 6px solid rgb(0, 0, 0);
+  border-color: rgb(0, 0, 0) transparent rgb(0, 0, 0) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  margin-left: 720px;
+  margin-top: 200px;
+}

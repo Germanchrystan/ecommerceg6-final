@@ -1,0 +1,60 @@
+.drawing-area {
+  position: absolute;
+  top: 60px;
+  left: 122px;
+  z-index: 10;
+  width: 360px;
+  height: 435px;
+  margin-left: -75px;
+  margin-top: -40px;
+}
+
+.canvas-container {
+  width: 360px;
+  height: 435px;
+  position: relative;
+  user-select: none;
+  margin-left: -50px;
+  margin-top: -30px;
+}
+
+#tshirt-div {
+  width: 360px;
+  height: 430px;
+  position: relative;
+  background-color: #fff;
+}
+
+#canvas {
+  position: absolute;
+  width: 200px;
+  height: 400px;
+  left: 0px;
+  top: 0px;
+  user-select: none;
+  cursor: default;
+}
+
+@media (max-width: 1141px) {
+  #section {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  #tshirt-div {
+    height: 390px;
+  }
+}
+
+@media (max-width: 360px) {
+  #tshirt-div {
+    height: 375px;
+  }
+}
+
+@media (max-width: 320px) {
+  #tshirt-div {
+    height: 325px;
+  }
+}

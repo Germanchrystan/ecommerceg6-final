@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+    .flex{display: flex;justify-content: center;}
+    #imagen{margin: auto;}
+    body{padding: 0px;margin: 0px;font-family: 'Great Vibes', "cursive";}
+    table,
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+</head>
+
+<body style="background-image: url('https://bl3302files.storage.live.com/y4mj4N1xEBFpo9tQYg9tdZSNz7OdfEsCB8pr_gXX2IuHALQVlf7Y1vX193N2TFbVlc1KXMYRluWrd56MRGu1NnROEzaQm4Gs7ggLGv_mhHEkRTRaTi5L6a6NvE95pV4DP91C20jGkbghL3JtKtiy9DnCixYVZq6AOKGzGBxJ_zVccJiHt4i-4keTncMbTUiz8VP?width=1300&height=1300&cropmode=none');">
+    <div style="background-color: black;" class="flex">
+        <img id="imagen" src="https://bl3302files.storage.live.com/y4moDmLZoLHIqwqpMK-RTLCHpYXJnXwpL-pMqkkWrkw5sGSL1ZYuiP92SL1a3BFrFd5-EUwTW0iuLL0mkd4XTqY26DKREjajaWqmWmy7SESqHAE1-fQHq7HUNpdm2ljnYKkWRpgllWdkyZofXKGs1RR0-vsYKkWpNaiwhrdUUVCTGb91RSx2_gAT-3fPWXZmuNl?width=1200&height=600&cropmode=none" style="width: 300px;"/>
+    </div>
+    <div class="d-flex justify-content-center">
+    <table class="table w-75 text-center my-5" style="width: 90%; margin:auto;text-align: center;">
+        <thead>
+        <tr>
+            <th class="w-25" style="font-weight:600; font-size:16px; width: 25%;">PRODUCTO</th>
+            <th class="w-25" style="font-weight:600; font-size:16px; width: 25%;">CANTIDAD</th>
+            <th class="w-25" style="font-weight:600; font-size:16px; width: 25%;">PRECIO UNITARIO</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each productos}}
+                <tr>
+                    <td class="text-center col" style="font-size: 16px;">{{nameProducto}}</td>
+                    <td class="text-center col" style="font-size: 16px;">{{cantidad}}</td>
+                    <td class="text-center col" style="font-size: 16px;">{{precioUnitario}}</td>
+                </tr>
+            {{/each}}
+        <tr>
+            <td style="font-weight: 600;font-size:16px;">TOTAL</td>
+            <td></td>
+            <td style="font-weight: 600;font-size:16px;">{{total}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </body>
+
+	<footer>
+        <p style="margin-left: 20px; font-size: 14px;">Gracias {{name}} por tu compra!</p>
+        <p style="margin-left: 20px; font-size: 14px;">Numero de orden: {{orden}}</p>
+		<p style="margin-left: 20px; margin-bottom: 20px; font-size: 14px;">Copyright 2021</p>
+	</footer>
+
+</body>
+
+</html>
+
