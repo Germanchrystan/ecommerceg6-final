@@ -46,6 +46,10 @@ const productSchema = new Schema(
       type: Boolean,
       default: false
     },
+    customRevision:{
+      type: String,
+      default: "Approved"
+    },
     userId:{
       type: String,
       default: "store"

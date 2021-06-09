@@ -4,7 +4,7 @@ import * as constants from "../constants";
 
 //const { REACT_APP_API } = 'https://e-commerce-g6-back.herokuapp.com/'; // En local comentar esta linea
 const { REACT_APP_API } = process.env; // En deploy comentar esta linea
-
+//=============================================================================//
 export const getAllProducts = (page,custom) => async (dispatch) => {
   dispatch({
     type: GET_ALL_PRODUCTS,
@@ -23,7 +23,7 @@ export const getAllProducts = (page,custom) => async (dispatch) => {
       });
     });
 };
-
+//=============================================================================//
 export const searchProducts = (name) => async(dispatch) => {
     return await api.searchProducts(name)
       .then((res) => {
@@ -34,9 +34,8 @@ export const searchProducts = (name) => async(dispatch) => {
     })
 
     .catch((error) => console.log(error));
-  
 }
-
+//=============================================================================//
 export const detailProduct = (id) => async(dispatch)=> {
     return await api.detailProduct(id)
       .then((res) => {
@@ -52,7 +51,7 @@ export const detailProduct = (id) => async(dispatch)=> {
       })
   });
 }
-
+//=============================================================================//
 export const addProducts = (body) => async (dispatch) => {
   dispatch({
     type: constants.ADD_PRODUCT,    
@@ -71,7 +70,7 @@ export const addProducts = (body) => async (dispatch) => {
     });
   });
 };
-
+//=============================================================================//
 export const deleteProduct = (payload) => 
   async(dispatch) => {
     return await api.deleteProduct(payload)
@@ -83,8 +82,7 @@ export const deleteProduct = (payload) =>
     })
   .catch((error) => console.log(error))
 }
-
-
+//=============================================================================//
 export const editProduct = (payload) => async(dispatch) => {
     return await api.editProduct(payload)
       .then((product) => {
@@ -95,7 +93,7 @@ export const editProduct = (payload) => async(dispatch) => {
     })
     .catch((error) => console.log(error))
 }
-
+//=============================================================================//
 export const stockUpdated = (id,quantity) => async(dispatch) => {
   return await api.editStock(id,quantity)
     .then((stock) => {
@@ -106,7 +104,7 @@ export const stockUpdated = (id,quantity) => async(dispatch) => {
   })
   .catch((error) => console.log(error))
 }
-
+//=============================================================================//
 export const deleteProductStock = (id) => async(dispatch) => {
   return await api.deleteStock(id)
   .then((stock) => {
@@ -117,7 +115,7 @@ export const deleteProductStock = (id) => async(dispatch) => {
   })
   .catch((error) => console.log(error))
 }
-
+//=============================================================================//
 export const addProductDiscount = (productId, percentage) => async(dispatch) => {
   dispatch({
     type: constants.ADD_PRODUCT_DISCOUNT
@@ -136,7 +134,7 @@ export const addProductDiscount = (productId, percentage) => async(dispatch) => 
     })
   }) 
 }
-
+//=============================================================================//
 export const removeProductDiscount = (productId) => async(dispatch) => {
   dispatch({
     type: constants.REMOVE_PRODUCT_DISCOUNT
@@ -155,3 +153,42 @@ export const removeProductDiscount = (productId) => async(dispatch) => {
     })
   })
 }
+//=============================================================================//
+export const customProductApproval = (productId) => async(dispatch) => {
+  dispatch({
+    type: constants.APPROVE_CUSTOM_PRODUCT
+  })
+  return await api.customProductApproval(productId)
+  .then((product) => {
+    dispatch({
+      type: constants.APPROVE_CUSTOM_PRODUCT_SUCCESS,
+      payload: product.data
+    })
+  })
+  .catch((error) => {
+    dispatch({
+      type: constants.APPROVE_CUSTOM_PRODUCT_ERROR,
+      payload: error.response?.data
+    })
+  })
+}
+//=============================================================================//
+export const customProductDisapproval = (productId) => async(dispatch) => {
+  dispatch({
+    type: constants.DISAPPROVE_CUSTOM_PRODUCT
+  })
+  return await api.customProductDisapproval(productId)
+  .then((product) => {
+    dispatch({
+      type: constants.DISAPPROVE_CUSTOM_PRODUCT_SUCCESS,
+      payload: product.data
+    })
+  })
+  .catch((error) => {
+    dispatch({
+      type: constants.DISAPPROVE_CUSTOM_PRODUCT_ERROR,
+      payload: error.response?.data
+    })
+  })
+}
+//=============================================================================//

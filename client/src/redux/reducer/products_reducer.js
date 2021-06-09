@@ -62,6 +62,18 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, allProducts: action.payload, isLoading: false, error: null }
     case constants.ADD_PRODUCT_DISCOUNT_ERROR:
       return { ...state, allProducts: null, isLoading: false, error: action.payload }
+    case constants.APPROVE_CUSTOM_PRODUCT:
+      return { ...state, allProducts: null, isLoading: true, error: null } 
+    case constants.APPROVE_CUSTOM_PRODUCT_SUCCESS:
+      return { ...state, allProducts: action.payload, isLoading: false, error: null }
+    case constants.APPROVE_CUSTOM_PRODUCT_ERROR:
+      return { ...state, allProducts: null, isLoading: false, error: action.payload }
+    case constants.DISAPPROVE_CUSTOM_PRODUCT:
+      return { ...state, allProducts: null, isLoading: true, error: null }
+    case constants.DISAPPROVE_CUSTOM_PRODUCT_SUCCESS:
+      return { ...state, allProducts: action.payload, isLoading: false, error: null }
+    case constants.DISAPPROVE_CUSTOM_PRODUCT_ERROR:
+      return { ...state, allProducts: null, isLoading: false, error: action.payload }
     default:
       return state;
   }

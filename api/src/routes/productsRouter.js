@@ -1,7 +1,6 @@
 const server = require("express").Router();
 const upload = require('./../libs/storage');
 
-
 const {
   addProducts,
   getProductsFilter,
@@ -13,7 +12,9 @@ const {
   getProductsById,
   imagaUpaload,
   addDiscount,
-  removeDiscount
+  removeDiscount,
+  customProductApproval,
+  customProductDisapproval
 } = require("../controllers/productController");
 
 
@@ -27,7 +28,11 @@ server.put("/stock/:id",updateStock);
 server.delete("/:id",deleteProducts);
 server.delete("/delete/stock/:id",removeProductStock );
 server.get('/image/:name', imagaUpaload);
+
 server.post('/discount/:productId', addDiscount);
 server.put('/discount/:productId', removeDiscount);
+
+server.put(`/revision/approve/:productId`, customProductApproval),
+server.put(`/revision/disapprove/:productId`, customProductDisapproval)
 
 module.exports = server;

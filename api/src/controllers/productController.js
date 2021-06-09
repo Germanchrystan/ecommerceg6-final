@@ -1,9 +1,11 @@
 const Product = require("./../models/Product");
+const { transporter } = require("../mailer");
+var EmailTemplate = require('email-templates-v2').EmailTemplate;
 const asyncHandler = require("express-async-handler");
-const Stock = require("../models/Stock");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
+const Stock = require("../models/Stock");
 const { where } = require("../models/Order");
 
 
@@ -385,7 +387,55 @@ const removeDiscount = async(req, res) => {
 } 
 
 //==========================================================================//
+const customProductApproval = async(req, res) => {
+  const {productId} = req.params;
+  //const {userId} = req.body;
 
+  const productFound = await Product.findOne({_id: productId}, function(error, productUpdated){
+    if(error){
+      return res.status(400).json({message:'There was an Error'})
+    }
+    if(!productUpdated) return res.status(404).json({message: 'Product not found'});
+    else {
+      productUpdated.customRevision = "Approved"
+      productUpdated.save(function(error){
+      if(error){
+        return res.status(400).json({message:"There was an Error while saving changes"})
+      }
+      res.status(200).json({productUpdated})
+      })
+    } 
+  });
+    // let foo = await transporter.sendMail({
+    //   from: '"Ecommerce" <ecommerceg6ft11@gmail.com>', // sender address
+    //   to: cart.userId.email, // list of receivers
+    //   subject: "Your order has been Cancelled", // Subject line
+    //   text: "Su compra se ha realizado satisfactoriamente. Muchas gracias!", // plain text body
+    //   html: "<b>Hello, your order has been successfully cancelled</b>", // html body
+    // });
+}
+
+
+//==========================================================================//
+const customProductDisapproval = async(req, res) => {
+  const {productId} = req.params;
+  //const {userId} = req.body;
+  const productFound = await Product.findOne({_id: productId}, function(error, productUpdated){
+    if(error){
+      return res.status(400).json({message:'There was an Error'})
+    }
+    if(!productUpdated) return res.status(404).json({message: 'Product not found'});
+    else {
+      productUpdated.customRevision = "Disapproved"
+      productUpdated.save(function(error){
+        if(error) return res.status(400).json({message:"There was an Error while saving changes"})
+        return res.status(200).json({productUpdated})
+      })
+    } 
+  });
+}
+
+//==========================================================================//
 module.exports = {
   getProducts,
   getProductsFilter,
@@ -397,5 +447,8 @@ module.exports = {
   getProductsById,
   imagaUpaload,
   addDiscount,
-  removeDiscount
+  removeDiscount,
+  customProductApproval,
+  customProductDisapproval
 };
+//==========================================================================//
