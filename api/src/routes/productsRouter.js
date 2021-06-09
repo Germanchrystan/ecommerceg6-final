@@ -11,7 +11,9 @@ const {
   removeProductStock,
   deleteProducts,
   getProductsById,
-  imagaUpaload
+  imagaUpaload,
+  addDiscount,
+  removeDiscount
 } = require("../controllers/productController");
 
 
@@ -25,5 +27,7 @@ server.put("/stock/:id",updateStock);
 server.delete("/:id",deleteProducts);
 server.delete("/delete/stock/:id",removeProductStock );
 server.get('/image/:name', imagaUpaload);
+server.post('/discount/:productId', addDiscount);
+server.put('/discount/:productId', removeDiscount);
 
 module.exports = server;

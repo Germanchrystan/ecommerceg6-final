@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
+const Float = require("mongoose-float").loadType(mongoose, 2);
 
 const productSchema = new Schema(
   {
@@ -64,6 +65,10 @@ const productSchema = new Schema(
         ref:"Stock",
       }
     ],
+    discount: {
+      percentage:{type:Number, default:0},
+      newPrice: {type: Float}
+    }
   },
   {
     timestamps: true,
