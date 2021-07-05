@@ -1,0 +1,15 @@
+-Remove traces from custom shirts
+-Use Categories as Tags
+
+Cart
+-Fix Removing item from Cart
+-Fix adding or removing unit from product from Cart
+
+Discounts
+-Fixing the front of the discount removal
+-Let the chatbot show a random discount
+
+FrontEnd
+-Fixing position of footer 
+-Fix Whishlist button
+
