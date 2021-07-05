@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import UserDetail from "./components/UserDetail/userDetail";
 import AdminPost from "./containers/Admin/adminPost";
 import AdminEdit from "./components/CrudProduct/editProduct";
+import EditProductDiscount from "./components/CrudProduct/editProductDiscount";
 import AuthForm from "./components/LogIn-Register/authform.jsx";
 import AdminCatalog from "./containers/Admin/adminCatalog";
 import CompleteCatalog from "./containers/CompleteCatalog/completeCatalog";
@@ -106,6 +107,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/editProduct/:id">
         <AdminEdit />
+      </Route>
+      <Route exact path='/editDiscount/:id'>
+        <EditProductDiscount/>
       </Route>
       <Route exact path="/post">
         <AdminPost />

@@ -150,41 +150,5 @@ export const removeProductDiscount = (productId) => async(dispatch) => {
   })
 }
 //=============================================================================//
-export const customProductApproval = (productId) => async(dispatch) => {
-  dispatch({
-    type: constants.APPROVE_CUSTOM_PRODUCT
-  })
-  return await api.customProductApproval(productId)
-  .then((product) => {
-    dispatch({
-      type: constants.APPROVE_CUSTOM_PRODUCT_SUCCESS,
-      payload: product.data
-    })
-  })
-  .catch((error) => {
-    dispatch({
-      type: constants.APPROVE_CUSTOM_PRODUCT_ERROR,
-      payload: error.response?.data
-    })
-  })
-}
-//=============================================================================//
-export const customProductDisapproval = (productId) => async(dispatch) => {
-  dispatch({
-    type: constants.DISAPPROVE_CUSTOM_PRODUCT
-  })
-  return await api.customProductDisapproval(productId)
-  .then((product) => {
-    dispatch({
-      type: constants.DISAPPROVE_CUSTOM_PRODUCT_SUCCESS,
-      payload: product.data
-    })
-  })
-  .catch((error) => {
-    dispatch({
-      type: constants.DISAPPROVE_CUSTOM_PRODUCT_ERROR,
-      payload: error.response?.data
-    })
-  })
-}
+
 //=============================================================================//

@@ -122,7 +122,6 @@ const EditProduct = () => {
     let stockFinded = productPreview.stock.find(prop => prop.colorName === stock.color && prop.sizeName === stock.size);
     dispatch(deleteProductStock(stockFinded._id))
   }
-  // console.log("PRUEBA", product)
   const deleteColor = (e) => {
     let filterColor = [];
     let filterSize = [];

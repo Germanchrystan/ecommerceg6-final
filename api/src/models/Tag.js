@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-const TagSchema = new Schema (
+const tagSchema = new Schema (
     {
         _id: Schema.Types.ObjectId,
         name: {
@@ -10,3 +10,6 @@ const TagSchema = new Schema (
         }
     }
 )
+
+module.exports = mongoose.model('Tag', tagSchema)
+
