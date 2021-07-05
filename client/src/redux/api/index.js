@@ -65,9 +65,6 @@ export const deleteStock = (payload) => API.delete(`/products/delete/stock/${pay
 export const addProductDiscount = (productId, percentage) => API.post(`/products/discount/${productId}`, percentage)
 export const removeProductDiscount = (productId) => API.put(`/products/discount/${productId}`);
 
-export const customProductApproval = (productId) => API.put(`/products/revision/approve/${productId}`)
-export const customProductDisapproval = (productId) => API.put(`/products/revision/disapprove/${productId}`)
-
 //USER
 export const getUsers = (page) => API.get(`/users?page=${page}`);
 export const searchUser = (payload) => API.get(`/users?keyword=${payload}`);

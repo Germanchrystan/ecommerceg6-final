@@ -12,15 +12,10 @@ import {getUserById } from './../../redux/actions/user_actions'
 const NewCart = () => {
     var { id } = useParams()
     const [payment, setPayment] = useState(0)
-    // const user = useSelector(state =>
-    //      state.userReducer)
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-<<<<<<< HEAD
     const [address, setAddress] = useState("-");
-    // console.log("USERRRR", user)
-=======
 
->>>>>>> whishlist
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCartFromUser(user?.result?._id))
@@ -31,11 +26,7 @@ const NewCart = () => {
     const userData = useSelector(
         (state) => state.userReducer?.user?.list?.userFound
     );
-<<<<<<< HEAD
-    // console.log("USER DATAA", userData?.addresses)
 
-=======
->>>>>>> whishlist
 
     const userCart = useSelector(
         (state) => (state.cartReducer.cart && state.cartReducer.cart && state.cartReducer.cart.cart && user) ? state.cartReducer.cart.cart.items : state.cartReducer

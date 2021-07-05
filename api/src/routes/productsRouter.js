@@ -10,11 +10,9 @@ const {
   removeProductStock,
   deleteProducts,
   getProductsById,
-  imagaUpaload,
+  imageUpload,
   addDiscount,
   removeDiscount,
-  customProductApproval,
-  customProductDisapproval
 } = require("../controllers/productController");
 
 
@@ -27,12 +25,10 @@ server.put("/:id",upload.array("img"),updateProducts);
 server.put("/stock/:id",updateStock);
 server.delete("/:id",deleteProducts);
 server.delete("/delete/stock/:id",removeProductStock );
-server.get('/image/:name', imagaUpaload);
+server.get('/image/:name', imageUpload);
 
 server.post('/discount/:productId', addDiscount);
 server.put('/discount/:productId', removeDiscount);
 
-server.put(`/revision/approve/:productId`, customProductApproval),
-server.put(`/revision/disapprove/:productId`, customProductDisapproval)
 
 module.exports = server;

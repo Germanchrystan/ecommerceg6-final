@@ -1,13 +1,10 @@
 import * as api from '../api/index.js';
 import * as constants from "../constants";
-
-
 //const { REACT_APP_API } = 'https://e-commerce-g6-back.herokuapp.com/'; // En local comentar esta linea
-const { REACT_APP_API } = process.env; // En deploy comentar esta linea
 //=============================================================================//
 export const getAllProducts = (page,custom) => async (dispatch) => {
   dispatch({
-    type: GET_ALL_PRODUCTS,
+    type: constants.GET_ALL_PRODUCTS,
   });
   return await api.getAllProducts(page,custom)
     .then((res) => {
@@ -37,18 +34,18 @@ export const searchProducts = (name) => async(dispatch) => {
 }
 //=============================================================================//
 export const detailProduct = (id) => async(dispatch)=> {
-    return await api.detailProduct(id)
-      .then((res) => {
-        dispatch({ 
-          type: constants.DETAIL_PRODUCT, 
-          payload: res.data 
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: constants.GET_PRODUCTS_ERROR,
-          payload: error.payload
-      })
+  return await api.detailProduct(id)
+  .then((res) => {
+    dispatch({ 
+      type: constants.DETAIL_PRODUCT, 
+      payload: res.data 
+    });
+  })
+  .catch((error) => {
+    dispatch({
+      type: constants.GET_PRODUCTS_ERROR,
+      payload: error.payload
+    })
   });
 }
 //=============================================================================//
@@ -71,27 +68,26 @@ export const addProducts = (body) => async (dispatch) => {
   });
 };
 //=============================================================================//
-export const deleteProduct = (payload) => 
-  async(dispatch) => {
-    return await api.deleteProduct(payload)
-      .then(() => {
-      dispatch({
-        type: constants.DELETE_PRODUCT,
-        payload
-      })
+export const deleteProduct = (payload) => async(dispatch) => {
+  return await api.deleteProduct(payload)
+  .then(() => {
+    dispatch({
+      type: constants.DELETE_PRODUCT,
+      payload
     })
+  })
   .catch((error) => console.log(error))
 }
 //=============================================================================//
 export const editProduct = (payload) => async(dispatch) => {
-    return await api.editProduct(payload)
-      .then((product) => {
-        dispatch({
-          type: constants.EDIT_PRODUCT,
-          payload: product.data
-        })
+  return await api.editProduct(payload)
+  .then((product) => {
+    dispatch({
+      type: constants.EDIT_PRODUCT,
+      payload: product.data
     })
-    .catch((error) => console.log(error))
+  })
+  .catch((error) => console.log(error))
 }
 //=============================================================================//
 export const stockUpdated = (id,quantity) => async(dispatch) => {

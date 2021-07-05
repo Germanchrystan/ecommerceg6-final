@@ -17,7 +17,7 @@ const getProducts = asyncHandler(async (req, res, next) => {
   const page = req.query.page || 1;
   const custom = req.query.custom;
   let keyword = req.query.keyword;
-  // console.log("AAA", custom, keyword)
+  
   if (custom && keyword) {
     keyword = {
       name: {
@@ -33,7 +33,7 @@ const getProducts = asyncHandler(async (req, res, next) => {
     }
   }
   if (!custom && keyword) {
-    console.log("entra")
+    
     keyword = {
       name: {
         $regex: req.query.keyword,
@@ -200,7 +200,7 @@ const addProducts = async (req, res) => {
   }
 };
 
-const imagaUpaload = (req, res) => {
+const imageUpload = (req, res) => {
   let getImage;
   const { name } = req.params;
   const images = name.split(",")
@@ -356,8 +356,8 @@ const addDiscount = async(req, res) => {
   
     const newPrice = product.price - (product.price/100 * percentage);
   
-    product.discount?.percentage = percentage;
-    product.discount?.newPrice = newPrice;
+    product.discount.percentage = percentage;
+    product.discount.newPrice = newPrice;
     product.save()
     return res.status(201).json({product})
   } catch(error){
@@ -387,53 +387,8 @@ const removeDiscount = async(req, res) => {
 } 
 
 //==========================================================================//
-const customProductApproval = async(req, res) => {
-  const {productId} = req.params;
-  //const {userId} = req.body;
-
-  const productFound = await Product.findOne({_id: productId}, function(error, productUpdated){
-    if(error){
-      return res.status(400).json({message:'There was an Error'})
-    }
-    if(!productUpdated) return res.status(404).json({message: 'Product not found'});
-    else {
-      productUpdated.customRevision = "Approved"
-      productUpdated.save(function(error){
-      if(error){
-        return res.status(400).json({message:"There was an Error while saving changes"})
-      }
-      res.status(200).json({productUpdated})
-      })
-    } 
-  });
-    // let foo = await transporter.sendMail({
-    //   from: '"Ecommerce" <ecommerceg6ft11@gmail.com>', // sender address
-    //   to: cart.userId.email, // list of receivers
-    //   subject: "Your order has been Cancelled", // Subject line
-    //   text: "Su compra se ha realizado satisfactoriamente. Muchas gracias!", // plain text body
-    //   html: "<b>Hello, your order has been successfully cancelled</b>", // html body
-    // });
-}
 
 
-//==========================================================================//
-const customProductDisapproval = async(req, res) => {
-  const {productId} = req.params;
-  //const {userId} = req.body;
-  const productFound = await Product.findOne({_id: productId}, function(error, productUpdated){
-    if(error){
-      return res.status(400).json({message:'There was an Error'})
-    }
-    if(!productUpdated) return res.status(404).json({message: 'Product not found'});
-    else {
-      productUpdated.customRevision = "Disapproved"
-      productUpdated.save(function(error){
-        if(error) return res.status(400).json({message:"There was an Error while saving changes"})
-        return res.status(200).json({productUpdated})
-      })
-    } 
-  });
-}
 
 //==========================================================================//
 module.exports = {
@@ -445,10 +400,8 @@ module.exports = {
   removeProductStock,
   deleteProducts,
   getProductsById,
-  imagaUpaload,
+  imageUpload,
   addDiscount,
-  removeDiscount,
-  customProductApproval,
-  customProductDisapproval
+  removeDiscount
 };
 //==========================================================================//

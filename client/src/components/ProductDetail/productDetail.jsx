@@ -33,13 +33,11 @@ function DetailProduct() {
       .then(result => result.data)
       .then(res => setUserCart(res))
     
-      const checkWhishlist = async()=>{
-        if(user?.result?._id){
+    const checkWhishlist = async()=>{
+      if(user?.result?._id){
         dispatch(getOrCreateWhishlistFromUser(user.result?._id))
         dispatch(isProductInWhishlist(user.result?._id, id))
         setWhishlistBool(whishlistData?.includes)
-           
-        
       }else {
         setWhishlistBool(undefined)
       }
@@ -195,10 +193,12 @@ function DetailProduct() {
                 <h1 className="text-gray-900 pl-3 text-3xl tracking-wide font-bold title-font mb-1">
                   {productsArray.name}
                 </h1>
-                {(whishlistBool!==undefined) && 
-
-                <div className="pl-5 "style={{cursor:"pointer"}} onClick={toggleWhishlist}>{(whishlistBool===true) ? <i class="far fa-heart"></i> : <i class="fas fa-heart"></i> }</div>}
-                
+                {
+                (whishlistBool!==undefined) && 
+                  <div className="pl-5 "style={{cursor:"pointer"}} onClick={toggleWhishlist}>
+                    <i class={`fa${whishlistBool? "r" : "s"} fa-heart`}></i> 
+                  </div>
+                }
               </div>
               <h2 class="text-l title-font pl-3 tracking-wide font-bold text-gray-500 ">
                 {!productStock && !productsArray?.custom ? (

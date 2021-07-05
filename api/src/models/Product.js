@@ -25,6 +25,12 @@ const productSchema = new Schema(
         ref: "Category",
       },
     ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag'
+      }
+    ],
     description: {
       type: String,
     },
@@ -42,27 +48,12 @@ const productSchema = new Schema(
       },
       required: [true, 'Insert a number required']
     },
-    custom:{
-      type: Boolean,
-      default: false
-    },
-    customRevision:{
-      type: String,
-      default: "Approved"
-    },
-    userId:{
-      type: String,
-      default: "store"
-    },
     productReview: [
       {
         type: Schema.Types.ObjectId,
         ref: "Review",
       }
     ],
-    customSize:{
-      type:String
-    },
     stock: [
       {
         type: Schema.Types.ObjectId,
