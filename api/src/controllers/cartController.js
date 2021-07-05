@@ -123,7 +123,7 @@ const incrementProductUnit = async (req, res) => {
         message: "Product not found",
       });
 
-    const price = itemFound.price;
+    const price = newItem.discount.percentage > 0 ? newItem.discount.newPrice : newItem.price;
     const stock = itemFound.stock;
     let itemIndex = cart.items.findIndex(
       (i) =>
@@ -194,7 +194,7 @@ const decrementProductUnit = async (req, res) => {
         message: "Product not found",
       });
 
-    const price = itemFound.price;
+    const price = newItem.discount.percentage > 0 ? newItem.discount.newPrice : newItem.price;
 
     let itemIndex = cart.items.findIndex(
       (i) =>
