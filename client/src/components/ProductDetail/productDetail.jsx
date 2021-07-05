@@ -177,6 +177,12 @@ function DetailProduct() {
       <section className="text-gray-700 body-font overflow-hidden mt-10 bg-gray-200">
         <div className="container px-5  py-28 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap bg-gray-100 pr-5 rounded sm:w-auto">
+            {productsArray.discount?.percentage > 0 && 
+            <div style={{margin:'1em',boxSizing:'border-box',position:'absolute', display:'flex', justifyContent:"center", alignItems:'center', width:'2em', height:'2em',padding:'2em',background:'green', borderRadius:'50%'}}>
+              <p style={{color:'white'}}>
+                {productsArray.discount.percentage}%
+              </p>
+            </div>}
             {productsArray.img && productsArray.img.length > 0 && (
               <img
                 alt="ecommerce"
@@ -304,9 +310,20 @@ function DetailProduct() {
                 </div>
               </div>
               <div className="flex mb-4 pl-3">
-                <span className="title-font font-medium text-2xl mt-1 text-gray-900">
+                {productsArray.discount?.percentage > 0 ?
+                <div style={{width:'30%', display:'flex', justifyContent:'space-around'}}>
+                  <span style={{textDecoration:'line-through'}} className="title-font font-medium text-2xl mt-1 text-gray-900">
                   ${productsArray.price}
+                  </span>
+                  <span className="title-font font-medium text-2xl mt-1 text-gray-900">
+                  ${productsArray.discount?.newPrice}
+                  </span>
+                </div>
+                :
+                <span className="title-font font-medium text-2xl mt-1 text-gray-900">
+                  ${ productsArray.price}
                 </span>
+                }
                 {changeOption !== "select" && productStock && productStock.stock >= 1 || (productsArray.custom && changeOption !== "select") ? (
                   // <a to={`/cart/${id}`}>
                   <button

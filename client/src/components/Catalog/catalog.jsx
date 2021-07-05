@@ -57,6 +57,12 @@ function Catalogo() {
                     >
                       <div key={key} className="card bg-white mb-5 px-4 py-4">
                         <div>
+                          {producto.discount?.percentage > 0 && 
+                          <div style={{boxSizing:'border-box',position:'absolute', display:'flex', justifyContent:"center", alignItems:'center', width:'2em', height:'2em',padding:'2em',background:'green', borderRadius:'50%'}}>
+                            <p style={{color:'white'}}>
+                              {producto.discount.percentage}%
+                            </p>
+                          </div>}
                         <img
                           src={`http://localhost:3001/products/image/${producto.img}`}
                           alt="https://i.stack.imgur.com/y9DpT.jpg"
@@ -70,7 +76,13 @@ function Catalogo() {
                         <div className="p-4">
                           <p className="text-black text-xl">{producto.name}</p>
                           {producto.stock === 0 && <h4 className="text-red-500">No Stock</h4>}
-                          <p className="text-blue-300 text-l">${producto.price}</p>
+
+                          {producto.discount?.percentage > 0 ? 
+                          <div style={{display:'flex', width: '25%', justifyContent:'space-around'}}>
+                            <p className="text-blue-300 text-l" style={{fontSize:'.8em',textDecoration:'line-through'}}>${producto.price}</p>
+                            <p className="text-green-300 text-l">{producto.discount.newPrice}</p>
+                          </div>
+                          : <p className="text-blue-300 text-l">${producto.price}</p>}
                           <p className="text-blue-300 text-l">{producto.brand}</p>
 
                         </div>

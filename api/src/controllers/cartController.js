@@ -44,7 +44,7 @@ const addItem = async (req, res) => {
 
     if (!newItem) return res.status(404).json({ message: "Product not found" });
 
-    const price = newItem.price;
+    const price = newItem.discount.percentage > 0 ? newItem.discount.newPrice : newItem.price;
     const name = newItem.name;
 
     if (cart) {
