@@ -17,9 +17,9 @@ export default function UniversalNavBar(props) {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  let productsArray = useSelector(
-    (state) => state.productsReducer.allProducts.products
-  );
+  // let productsArray = useSelector(
+  //   (state) => state.productsReducer.allProducts.products
+  // );
 
   const [input, setInput] = useState({
     name: "",
@@ -152,7 +152,7 @@ export default function UniversalNavBar(props) {
               value={input.name}
               onChange={(e) => handleChange(e)}
             />
-            <div className="-mt-2 ml-2">
+            {/* <div className="-mt-2 ml-2">
               {productsArray &&
                 productsArray.length > 0 && !selectedProduct &&
                 input.name !== "" &&
@@ -168,7 +168,7 @@ export default function UniversalNavBar(props) {
                     </div>
                   );
                 })}
-            </div>
+            </div> */}
           </div>
         )}
         <ul className="menu">

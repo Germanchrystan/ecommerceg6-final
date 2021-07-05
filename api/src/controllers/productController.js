@@ -354,12 +354,12 @@ const addDiscount = async(req, res) => {
     const product = await Product.findById(productId);
     if(!product) return res.status(404).json({message: 'Product not found'});
   
-    const newPrice = product.price - (product.price/100 * percentage);
+    const newPrice = product.price - (product.price/100 * Number(percentage));
   
     product.discount.percentage = percentage;
     product.discount.newPrice = newPrice;
     product.save()
-    return res.status(201).json({product})
+    return res.status(201).json(product)
   } catch(error){
     console.log(error)
     return res.status(500).json({message: 'There was an  Error'})
@@ -376,7 +376,7 @@ const removeDiscount = async(req, res) => {
     product.discount.newPrice = 0;
 
     product.save();
-    return res.status(200).json({product});
+    return res.status(200).json(product);
 
   }catch(error){
     

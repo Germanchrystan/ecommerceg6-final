@@ -112,7 +112,7 @@ export const deleteProductStock = (id) => async(dispatch) => {
   .catch((error) => console.log(error))
 }
 //=============================================================================//
-export const addProductDiscount = (productId, percentage) => async(dispatch) => {
+export const addProductDiscount = (productId, percentage, history, swal) => async(dispatch) => {
   dispatch({
     type: constants.ADD_PRODUCT_DISCOUNT
   })
@@ -123,15 +123,28 @@ export const addProductDiscount = (productId, percentage) => async(dispatch) => 
       payload: product.data
     })
   })
+  .then(async()=>{
+    swal({
+      title: "Done!",
+      text: 'Discount Added to Product',
+      icon: `success`
+    })
+  })
+  .then(() => history.push(`/editDiscount/${productId}`))
   .catch((error) => {
     dispatch({
       type: constants.ADD_PRODUCT_DISCOUNT_ERROR,
       payload: error.response?.data
     })
+    swal({
+      title: 'Error',
+      text: 'Discount couldn`t be added',
+      icon: 'warning'
+    })
   }) 
 }
 //=============================================================================//
-export const removeProductDiscount = (productId) => async(dispatch) => {
+export const removeProductDiscount = (productId, history, swal) => async(dispatch) => {
   dispatch({
     type: constants.REMOVE_PRODUCT_DISCOUNT
   })
@@ -142,10 +155,23 @@ export const removeProductDiscount = (productId) => async(dispatch) => {
       payload: product.data
     })
   })
+  .then(async()=>{
+    swal({
+      title: 'Done!',
+      text: 'Discount removed from product',
+      icon: 'info'
+    })
+  })
+  .then(() => history.push(`/Admin`))
   .catch((error) => {
     dispatch({
       type: constants.REMOVE_PRODUCT_DISCOUNT_ERROR,
       payload: error.response?.data
+    })
+    swal({
+      title: 'Error',
+      text: 'Discount couldn`t be removed',
+      icon: 'warning'
     })
   })
 }
