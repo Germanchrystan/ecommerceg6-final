@@ -50,6 +50,7 @@ export const incrementProductUnit = (product, userId,colorName,sizeName) => API.
 //Trae carro por id de carro
 export const getCartsById = (cartId) => API.get(`/carts/id/${cartId}`);
 
+export const getMercadoPago = (userId) => API.get(`/mercadopago/${userId}`);
 
 
 

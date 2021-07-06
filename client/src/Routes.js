@@ -33,7 +33,7 @@ import AddAddressForm from './components/UserEdit/addAddressForm';
 import HistorialCompras from "./containers/HistorialCompras/historialCompras"
 import CarroDetallado from "./containers/CarroDetallado/carroDetallado"
 import TshirtFeature from "./components/T-Shirt/tshirtFeature";
-import CustomCatalog from "./components/Catalog/customCatalog";
+// import CustomCatalog from "./components/Catalog/customCatalog";
 
 
 export default function Routes() {
@@ -76,9 +76,9 @@ export default function Routes() {
       <Route exact path="/design">
         <TshirtFeature />
       </Route>
-      <Route exact path="/custom">
+      {/* <Route exact path="/custom">
         <CustomCatalog />
-      </Route>
+      </Route> */}
       <Route exact path="/MyProfile/addAddress/:id">
         <AddAddressForm />
       </Route>

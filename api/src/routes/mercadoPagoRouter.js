@@ -4,7 +4,7 @@ const {transporter} = require('../mailer.js')
 // SDK de Mercado Pago
 const mercadopago = require('mercadopago');
 
-const { ACCESS_TOKEN } = process.env;
+const { ACCESS_TOKEN, FRONT_URL } = process.env;
 
 //Agrega credenciales
 mercadopago.configure({
@@ -56,9 +56,9 @@ server.get("/:userId", async (req, res, next) => {
       installments: 3  //Cantidad máximo de cuotas
     },
     back_urls: {
-      success: `http://localhost:3000/home/${userId}`,
-      failure: 'http://localhost:3000/',
-      pending: 'http://localhost:3000/',
+      success: `${FRONT_URL}/home/${userId}`,
+      failure: `${FRONT_URL}/`,
+      pending: `${FRONT_URL}/`,
     }
   };
 

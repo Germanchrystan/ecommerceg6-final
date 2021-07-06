@@ -250,6 +250,11 @@ export const getCartsById = (cartId) => async(dispatch) => {
     })
 }
 //=============================================//
+export const getMercadoPago = (userId) => async(dispatch) =>{
+    return await api.getMercadoPago(userId);
+}
+
+//=============================================//
     export function addToCart(obj) {
         return {
             type: "ADD_TO_CART",

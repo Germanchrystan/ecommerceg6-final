@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UniversalNavBar from '../UniversalNavBar/universalNavBar'
 import Footer from '../../containers/Footer/footer'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem, getActiveCartFromUser, getCartFromUser, getCartsByUser, incrementProductUnit, decrementProductUnit } from '../../redux/actions/cart_actions';
+import { deleteItem, getActiveCartFromUser, getCartFromUser, getCartsByUser, incrementProductUnit, decrementProductUnit, getMercadoPago } from '../../redux/actions/cart_actions';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ const NewCart = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [address, setAddress] = useState("-");
 
-
+const { REACT_APP_API } = process.env;
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCartFromUser(user?.result?._id))
@@ -105,33 +105,30 @@ const NewCart = () => {
         if (usuario == null) {
             return document.getElementById("redirect").click();
         }
-        console.log(usuario)
+        
 
         document.getElementById("ch").setAttribute("disabled", true)
-
+        // dispatch(getMercadoPago(usuario?.result?._id))
         fetch(`http://localhost:3001/mercadopago/${usuario?.result?._id}`)
-            .then(res => res.json())
-            .then((res) => {
-                console.log(res)
-                //alert(JSON.stringify(res))
-                if (res.hasOwnProperty("message")) {
-                    swal("error", "No tienes un carrito creado", "error")
-                    document.getElementById("ch").removeAttribute("disabled")
-                    return;
-                }
-                setPayment(res.id)
-                document.getElementById("payment").click()
-                //document.getElementById("ch").removeAttribute("disabled")
-            })
-            .catch(err => {
-                swal("Error", "error", "error")
+        .then(res => res.json())
+        .then((res) => {
+            console.log(res)
+            //alert(JSON.stringify(res))
+            if (res.hasOwnProperty("message")) {
+                swal("error", "No tienes un carrito creado", "error")
                 document.getElementById("ch").removeAttribute("disabled")
-            })
-        }
-    }
+                return;
+            }
+            setPayment(res.id)
+            document.getElementById("payment").click()
+            //document.getElementById("ch").removeAttribute("disabled")
+        })
+        .catch(err => {
+            swal("Error", "error", "error")
+            document.getElementById("ch").removeAttribute("disabled")
+        })
+    }}
 
-
-    console.log("CONSOLE DE USERcART", userCart)
 
     return (
         <div className="bg-gray-200 h-full md:h-screen tracking-wide font-bold">
