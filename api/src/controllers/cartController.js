@@ -69,7 +69,7 @@ const addItem = async (req, res) => {
         cart.items[itemIndex] = productItem;
       } else {
         cart.items.push({
-          productId: newItem,
+          productId: newItem._id,
           name,
           quantity,
           price,
@@ -88,7 +88,7 @@ const addItem = async (req, res) => {
         userId,
         items: [
           {
-            product: newItem,
+            productId: newItem._id,
             name,
             quantity,
             colorName,
@@ -118,12 +118,14 @@ const incrementProductUnit = async (req, res) => {
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
     let itemFound = await Product.findOne({ _id: productId });
-    if (!itemFound)
+    if (!itemFound){
+      console.log("Product not found")
       return res.status(404).json({
         message: "Product not found",
       });
+    }
 
-    const price = newItem.discount.percentage > 0 ? newItem.discount.newPrice : newItem.price;
+    const price = itemFound.discount.percentage > 0 ? itemFound.discount.newPrice : itemFound.price;
     const stock = itemFound.stock;
     let itemIndex = cart.items.findIndex(
       (i) =>
@@ -161,19 +163,6 @@ const incrementProductUnit = async (req, res) => {
   
     //========================================//
 
-    // if(itemIndex.quantity < stock) {
-    //     let productItem = cart.items[itemIndex]
-    //     productItem.quantity += 1;
-    //     cart.items[itemIndex] = productItem
-    //     cart.totalAmount += price;
-
-    //     cart = await cart.save();
-    //     return res.status(201).json({cart})
-
-    // } else {
-    //     console.log("ERROR")
-    //     return res.status(400).json({message:'Cannot add more than the stock available'})
-    // }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "There was an error" });
@@ -194,7 +183,7 @@ const decrementProductUnit = async (req, res) => {
         message: "Product not found",
       });
 
-    const price = newItem.discount.percentage > 0 ? newItem.discount.newPrice : newItem.price;
+    const price = itemFound.discount.percentage > 0 ? itemFound.discount.newPrice : itemFound.price;
 
     let itemIndex = cart.items.findIndex(
       (i) =>

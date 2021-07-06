@@ -74,20 +74,20 @@ const NewCart = () => {
 
     const increment = (user, cart) => {
 
-        const productBody = { productId: cart?.productId };
-        // console.log("asdsd", cart)
+        const productId = cart?.productId;
+        console.log("product body", productId);
         setitemQuantity(itemQuantity + 1)
-        dispatch(incrementProductUnit(productBody.productId, user.result._id, cart.colorName, cart.sizeName)); // {"productId": cart.productId} , user.result._id
+        dispatch(incrementProductUnit(productId, user.result._id, cart.colorName, cart.sizeName)); // {"productId": cart.productId} , user.result._id
         //Actualizar el numerito del medio acá
         totalItems()
         //Vean de ponerle un disable al boton de + si el número es igual al stock 
         //(Ahora traigo en el esquema de Cart el stock de cada producto)
     }
     const decrement = (user, cart) => {
-        const productBody = { productId: cart?.productId };
+        const productId = cart?.productId ;
 
         setitemQuantity(itemQuantity - 1)
-        dispatch(decrementProductUnit(productBody.productId, user.result._id, cart.colorName, cart.sizeName))  // {"productId": cart.productId} , user.result._id
+        dispatch(decrementProductUnit(productId, user.result._id, cart.colorName, cart.sizeName))  // {"productId": cart.productId} , user.result._id
         //Acá el disable iría si el número es igual a 1
         totalItems()
     }

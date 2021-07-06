@@ -29,8 +29,7 @@ export const getCartNotLogged = () => {
 //=============================================//
 export const addItemNotLogged = (productBody) => {
     let cart = getCartNotLogged();
-    console.log("CCCCC",cart)
-    console.log("ADDITEMNOTLOGGED",productBody)
+
     let price = productBody.price;
     let quantity = productBody.quantity;
     let productId = productBody.productId;
@@ -60,7 +59,7 @@ export const deleteItemNotLogged = (productId) => {
     } 
 }
 //=============================================//
-export const incrementProductUnitNotLogged = (productId,color,size) => {
+export const incrementProductUnitNotLogged = (productId,color,size) => { //REVISAR: COLOR Y SIZE NO SE ESTÁN USANDO
     let cart = getCartNotLogged();
     let productIndex = cart.items.findIndex((i) => i.productId === productId);
     if( productIndex > -1){
