@@ -51,7 +51,7 @@ export const incrementProductUnit = (product, userId,colorName,sizeName) => API.
 export const getCartsById = (cartId) => API.get(`/carts/id/${cartId}`);
 
 export const getMercadoPago = (userId) => API.get(`/mercadopago/${userId}`);
-
+export const postMercadoPagoPayment = (userId, cartBody) => API.post(`/mercadopago/${userId}`,cartBody);
 
 
 //PRODUCT
