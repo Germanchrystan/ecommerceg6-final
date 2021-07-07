@@ -57,13 +57,17 @@ const mercadoPagoPayment = async(req, res) => {
     const mpResponse = mercadopago.preferences.create(preference);
     
     //Usando los datos que devuelve mpReponse
-    //...
+    ;
 
 
     //Actualizando Datos del Cart 
     cart.address = address;
     cart.state = "Paid";
+    
+    cart.payment.id =  mpResponse.response.id
+    cart.payment.link = mpResponse.body.init_point; 
     const updateCart = await cart.save();
+    
     //Enviando Mail
     let foo = await transporter.sendMail({
         from: '"Ecommerce" <ecommerceg6ft11@gmail.com>', // sender address

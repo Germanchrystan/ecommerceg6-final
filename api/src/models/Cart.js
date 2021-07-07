@@ -16,6 +16,10 @@ const cartSchema = new Schema({
   state:{ type: String, default: 'Active' },
   totalAmount:{ type: Float },
   address:{type: String, default: ''},
+  payment:{
+    link: {type: String, default: ''},
+    id: {type: String, default:''}
+  },
   fechaCierre:{type:Schema.Types.Date}     
 })
 
