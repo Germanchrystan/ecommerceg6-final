@@ -8,7 +8,7 @@ const userRouter = require("./usersRouter");
 const orderRouter = require('./orderRouter');
 const reviewRouter = require('./reviewsRouter')
 const cartRouter = require('./cartRouter');
-const mercadopagoRouter = require('./mercadoPagoRouter');
+const mercadoPagoRouter = require('./mercadoPagoRouter');
 const whishlistRouter = require('./whishlistRouter');
 
 // load each router on a route
@@ -19,7 +19,7 @@ router.use("/users", userRouter); // Ex: http://localhost:3001/users ... para pr
 router.use('/orders', orderRouter); // Ex: http://localhost:3001/orders ... para probar ruta
 router.use('/reviews', reviewRouter) // Ex: http://localhost:3001/reviews ... para probar ruta
 router.use('/carts', cartRouter) // Ex: http://localhost:3001/carts ... para probar ruta
-router.use('/mercadopago', mercadopagoRouter); // Ex: http://localhost:3001/mercadopago ... para probar ruta
+router.use('/mercadopago', mercadoPagoRouter); // Ex: http://localhost:3001/mercadopago ... para probar ruta
 router.use('/whishlists', whishlistRouter); // Ex: http://localhost:3001/whishlists ... para probar ruta
 
 module.exports = router;
