@@ -56,15 +56,11 @@ const mercadoPagoPayment = async(req, res) => {
 
     const mpResponse = mercadopago.preferences.create(preference);
     
-    //Usando los datos que devuelve mpReponse
-    ;
-
-
     //Actualizando Datos del Cart 
     cart.address = address;
     cart.state = "Paid";
     
-    cart.payment.id =  mpResponse.response.id
+    cart.payment.id =  mpResponse.response.id;
     cart.payment.link = mpResponse.body.init_point; 
     const updateCart = await cart.save();
     

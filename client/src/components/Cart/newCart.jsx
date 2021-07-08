@@ -105,15 +105,11 @@ const { REACT_APP_API } = process.env;
         if (usuario == null) {
             return document.getElementById("redirect").click();
         }
-        
-
         document.getElementById("ch").setAttribute("disabled", true)
         // dispatch(getMercadoPago(usuario?.result?._id))
         fetch(`http://localhost:3001/mercadopago/${usuario?.result?._id}`)
         .then(res => res.json())
         .then((res) => {
-            console.log(res)
-            //alert(JSON.stringify(res))
             if (res.hasOwnProperty("message")) {
                 swal("error", "No tienes un carrito creado", "error")
                 document.getElementById("ch").removeAttribute("disabled")
