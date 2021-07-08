@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { Link } from "react-router-dom";
+import swal from 'sweetalert';
+
 import UniversalNavBar from '../UniversalNavBar/universalNavBar'
 import Footer from '../../containers/Footer/footer'
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem, getActiveCartFromUser, getCartFromUser, getCartsByUser, incrementProductUnit, decrementProductUnit, getMercadoPago } from '../../redux/actions/cart_actions';
-import { useParams } from 'react-router';
-import swal from 'sweetalert';
-import { Link } from "react-router-dom";
-import {getUserById } from './../../redux/actions/user_actions'
 
+import {getUserById } from './../../redux/actions/user_actions'
+import { deleteItem, getActiveCartFromUser, getCartFromUser, getCartsByUser, incrementProductUnit, decrementProductUnit, getMercadoPago } from '../../redux/actions/cart_actions';
+import { postMercadoPago } from './../../redux/actions/mercadopago_actions';
  
 const NewCart = () => {
     var { id } = useParams()
@@ -15,7 +17,7 @@ const NewCart = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [address, setAddress] = useState("-");
 
-const { REACT_APP_API } = process.env;
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCartFromUser(user?.result?._id))
@@ -27,6 +29,9 @@ const { REACT_APP_API } = process.env;
         (state) => state.userReducer?.user?.list?.userFound
     );
 
+    const mercadoPagoData = useSelector(
+        (state) => (state.mercadoPagoReducer)
+    )
 
     const userCart = useSelector(
         (state) => (state.cartReducer.cart && state.cartReducer.cart && state.cartReducer.cart.cart && user) ? state.cartReducer.cart.cart.items : state.cartReducer
@@ -105,24 +110,25 @@ const { REACT_APP_API } = process.env;
         if (usuario == null) {
             return document.getElementById("redirect").click();
         }
-        document.getElementById("ch").setAttribute("disabled", true)
-        // dispatch(getMercadoPago(usuario?.result?._id))
-        fetch(`http://localhost:3001/mercadopago/${usuario?.result?._id}`)
-        .then(res => res.json())
-        .then((res) => {
-            if (res.hasOwnProperty("message")) {
-                swal("error", "No tienes un carrito creado", "error")
-                document.getElementById("ch").removeAttribute("disabled")
-                return;
-            }
-            setPayment(res.id)
-            document.getElementById("payment").click()
-            //document.getElementById("ch").removeAttribute("disabled")
-        })
-        .catch(err => {
-            swal("Error", "error", "error")
-            document.getElementById("ch").removeAttribute("disabled")
-        })
+        //document.getElementById("ch").setAttribute("disabled", true)
+        dispatch(postMercadoPago(usuario?.result?._id, {address:address}))
+        console.log("ID MERCADO PAGO", mercadoPagoData.id)
+        /*----------------------------------------------------------------------------------*/
+        // .then((res) => {
+        //     if (res.hasOwnProperty("message")) {
+        //         swal("error", "No tienes un carrito creado", "error")
+        //         document.getElementById("ch").removeAttribute("disabled")
+        //         return;
+        //     }
+        //     setPayment(res.id)
+        //     document.getElementById("payment").click()
+            
+        /*----------------------------------------------------------------------------------*/
+        //})
+        // .catch(err => {
+        //     swal("Error", "error", "error")
+        //     document.getElementById("ch").removeAttribute("disabled")
+        // })
     }}
 
 

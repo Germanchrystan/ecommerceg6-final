@@ -1,7 +1,8 @@
 import * as constants from './../constants/index';
 
 const initialState = {
-    order = {}
+    order: {},
+    id:''
 }
 
 const mercadoPagoReducer = (state = initialState, action) => {
@@ -9,7 +10,9 @@ const mercadoPagoReducer = (state = initialState, action) => {
         case constants.POST_MERCADO_PAGO:
             return{...state, order: {}, isLoading: true, error: null}
         case constants.POST_MERCADO_PAGO_SUCCESS:
-            return {...state, order: action.payload, isLoading: false, error: null}
+            console.log(action.payload)
+            localStorage.setItem('mercadopagoid', JSON.stringify(action.payload.id))
+            return {...state, order: action.payload, id:action.payload.id, isLoading: false, error: null}
         case constants.POST_MERCADO_PAGO_ERROR:
             return {...state, order: {}, isLoading: false, error: action.payload}
         default:
