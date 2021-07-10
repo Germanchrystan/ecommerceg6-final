@@ -136,7 +136,7 @@ const NewCart = () => {
     return (
         <div className="bg-gray-200 h-full md:h-screen tracking-wide font-bold">
             <UniversalNavBar />
-            <Link to={{pathanme: `${payment}`}} target="_blank" id="payment" style={{ display: "none" }}></Link>
+            {/* NO SE USA MÁS: AHORA SE VA DIRECTO AL LINK <Link to={{pathanme: `${payment}`}} target="_blank" id="payment" style={{ display: "none" }}></Link> */}
             <Link to="/auth" id="redirect" style={{ display: "none" }}></Link>
             <div className="grid grid-cols-12 mt-16 pt-4 gap-6">
                 <div className="col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-8 xxl:col-span-8">

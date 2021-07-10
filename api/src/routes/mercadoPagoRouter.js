@@ -1,7 +1,8 @@
 const server = require("express").Router();
+const Cart = require('./../models/Cart')
 const {
   mercadoPagoPayment,
-  mercadoPagoRedirect
+  
 } = require("./../controllers/mercadoPagoController")
 // ------------------- ROUTES ------------------
 

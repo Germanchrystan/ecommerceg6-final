@@ -152,32 +152,16 @@ export default function UniversalNavBar(props) {
               value={input.name}
               onChange={(e) => handleChange(e)}
             />
-            {/* <div className="-mt-2 ml-2">
-              {productsArray &&
-                productsArray.length > 0 && !selectedProduct &&
-                input.name !== "" &&
-                productsArray.map((prop, key) => {
-                  return (
-                    <div className="flex justify-center " key={key}>
-                      <p
-                        onClick={(e) => completeInput(prop.name)}
-                        className="cursor-pointer bg-white w-40 mr-80 hover:bg-gray-200"
-                      >
-                        {prop.name}
-                      </p>
-                    </div>
-                  );
-                })}
-            </div> */}
+
           </div>
         )}
         <ul className="menu">
           <li className="-py-2">
             <Link to="/Shop">Shop</Link>
           </li>
-          <li className="-py-2">
+          {/* <li className="-py-2">
             <Link to="/design">Create T-Shirt</Link>
-          </li>
+          </li> */}
           {user?.result?.username ? (
             <li className="-py-2">
               <Link to="/myProfile">{user.result.username}</Link>

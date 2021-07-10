@@ -48,7 +48,7 @@ const mercadoPagoPayment = async(req, res) => {
             installments: 3  //Cantidad máximo de cuotas
         },
         back_urls: {
-            success: `${FRONT_URL}/`,
+            success: `${FRONT_URL}/home/${userId}`,
             failure: `${FRONT_URL}/`,
             pending: `${FRONT_URL}/`,
         }
@@ -56,17 +56,17 @@ const mercadoPagoPayment = async(req, res) => {
 
     mercadopago.preferences.create(preference)
     .then(async(response) => {
-        
+        console.info('responded')
         //Este valor reemplazará el string"<%= global.id %>" en tu HTML
         global.id = response.body.id;
-        global.link = response.body.init_point;
+        global.link = response.body.init_point
         //Actualizando Datos del Cart 
         cart.payment.id = global.id;
         cart.payment.link =global.link; 
         cart.address = address;
         const updateCart = await cart.save();
 
-        return res.json({ id: global.id, updateCart, link: global.link });
+        return res.json({ id: global.id, updateCart, link:global.link });
     })
     .catch(function (error) {
         console.log(error);
