@@ -12,6 +12,8 @@ const mercadoPagoReducer = (state = initialState, action) => {
         case constants.POST_MERCADO_PAGO_SUCCESS:
             console.log(action.payload)
             localStorage.setItem('mercadopagoid', JSON.stringify(action.payload.id))
+            localStorage.setItem('mercadopagolink', JSON.stringify(action.payload.link))
+
             return {...state, order: action.payload, id:action.payload.id, isLoading: false, error: null}
         case constants.POST_MERCADO_PAGO_ERROR:
             return {...state, order: {}, isLoading: false, error: action.payload}

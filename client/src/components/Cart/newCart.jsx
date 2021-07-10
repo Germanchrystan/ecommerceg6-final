@@ -112,16 +112,17 @@ const NewCart = () => {
         }
         //document.getElementById("ch").setAttribute("disabled", true)
         dispatch(postMercadoPago(usuario?.result?._id, {address:address}))
-        console.log("ID MERCADO PAGO", mercadoPagoData.id)
+        .then(async()=>{
+            const newLink = JSON.parse(localStorage.getItem('mercadopagolink'));
+            console.log(newLink);
+            await setPayment(newLink)
+            window.location.replace(newLink)
+            
+
+        })
         /*----------------------------------------------------------------------------------*/
         // .then((res) => {
-        //     if (res.hasOwnProperty("message")) {
-        //         swal("error", "No tienes un carrito creado", "error")
-        //         document.getElementById("ch").removeAttribute("disabled")
-        //         return;
-        //     }
         //     setPayment(res.id)
-        //     document.getElementById("payment").click()
             
         /*----------------------------------------------------------------------------------*/
         //})
@@ -135,7 +136,7 @@ const NewCart = () => {
     return (
         <div className="bg-gray-200 h-full md:h-screen tracking-wide font-bold">
             <UniversalNavBar />
-            <Link to={`/payment/${payment}`} id="payment" style={{ display: "none" }}></Link>
+            <Link to={{pathanme: `${payment}`}} target="_blank" id="payment" style={{ display: "none" }}></Link>
             <Link to="/auth" id="redirect" style={{ display: "none" }}></Link>
             <div className="grid grid-cols-12 mt-16 pt-4 gap-6">
                 <div className="col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-8 xxl:col-span-8">
