@@ -16,7 +16,7 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
-    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers", //y esto?
     "Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 
 server.use("/", routes);
 
-server.use(cors({ origin: process.env.REACT_APP_API_URL, credentials: true }));
+//server.use(cors({ origin: process.env.FRONT_URL, credentials: true }));
 
 // Error catching endware.
 server.use((err, req, res, next) => {

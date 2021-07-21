@@ -1,7 +1,6 @@
 import React from "react"
 import Footer from "../Footer/footer"
 import ImagenAbout from "../../assets/aboutus.png"
-import ImagenJuanIgnacio from "../../assets/Juan.jpg"
 import ImagenJuli from "../../assets/Juli.jpeg"
 import UniversalNavBar from "../../components/UniversalNavBar/universalNavBar"
 
@@ -69,26 +68,7 @@ export default function About() {
 
                         </div>
                     </div>
-                    <div className="flex justify-center mx-20 my-10">
-                        <img className="w-32 h-32 rounded-full border-green-500 border-4" src={ImagenJuanIgnacio} />
-                        <div className="flex flex-col justify-center items-center">
-                            <p className="mx-10">Mi carrera anterior fue en comercio minorista, ingreso de datos, reparación y ensamblaje de computadoras, redes de computadoras y cámaras de seguridad. Recientemente he vuelto a capacitarme como desarrollador web de pila completa en
-                                JavaScript,
-                                CSS,
-                                HTML
-                                NodeJs,
-                                React,
-                                Redux,
-                                SQL
-
-                                Estoy buscando un trabajo de desarrollador de nivel de entrada donde pueda aprender y usar mis nuevas habilidades en un entorno práctico, he realizado varios proyectos durante mi capacitación utilizando Visual Studio Code, Postman y lenguajes de codificación, estoy comprometido a producir sitios web con un gran experiencia del usuario y que están optimizados para SEO para tener un alto rango en los resultados de búsqueda de Google.
-
-                                Para ver más detalles, por favor, busque en mi github.</p>
-
-                            <button className="my-5 text-lg font-bold pl-2 pr-16 py-2 bg-transparent rounded-lg w-16 text-black-500 border-green-500 border-2 hover:bg-green-500" onClick={e => redirigir("https://github.com/Pitelbarbia")}>Github</button>
-
-                        </div>
-                    </div>
+                    
                     <div className="flex justify-center mx-20 my-10">
                         <img className="w-32 h-32 rounded-full border-green-500 border-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScQ0gUFiWvt2SqU6kufMvSTPOYgYHS3ua0oivfLbJ1UCMcc9xZNqBWpD4TZW8AZc340Ug&usqp=CAU" />
                         <div className="flex flex-col justify-center items-center">

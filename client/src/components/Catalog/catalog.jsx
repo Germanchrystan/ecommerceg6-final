@@ -30,7 +30,7 @@ function Catalogo() {
       dangerMode: true,
     })
   }
-  console.log(productsArray)
+  
   return (
     <div className=" mt-20 tracking-wide font-bold ">
       <div className="flex justify-center bg-transparent">
@@ -64,7 +64,7 @@ function Catalogo() {
                             </p>
                           </div>}
                         <img
-                          src={`http://localhost:3001/products/image/${producto.img}`}
+                          src={`https://adalov-clothes.herokuapp.com/products/image/${producto.img}`}
                           alt="https://i.stack.imgur.com/y9DpT.jpg"
                           style={{ height: "400px", width: "420px" }}
                         />

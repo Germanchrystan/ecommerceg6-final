@@ -29,9 +29,9 @@ function DetailProduct() {
   useEffect(() => {
     dispatch(detailProduct(id));
     dispatch(filterById(id));
-    getCartsByUser(user?.result?._id)
-      .then(result => result.data)
-      .then(res => setUserCart(res))
+    // getCartsByUser(user?.result?._id)
+    //   .then(result => result.data)
+    //   .then(res => setUserCart(res))
     
     const checkWhishlist = async()=>{
       if(user?.result?._id){
@@ -188,7 +188,7 @@ function DetailProduct() {
                 alt="ecommerce"
                 className="lg:w-1/2 w-full object-cover object-center pl-5 py-5 rounded border "
                 onClick={changeImage}
-                src={`http://localhost:3001/products/image/${productsArray.img[imagePos]}`}
+                src={`https://adalov-clothes.herokuapp.com/products/image/${productsArray.img[imagePos]}`}
               />
             )}
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

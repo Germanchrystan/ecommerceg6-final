@@ -17,7 +17,7 @@ function FilterBar() {
   );
   let productsArray = useSelector((state) => state.productsReducer.allProducts);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  console.log("ASDSADSAD",user)
+
   useEffect(() => {
     dispatch(getCategories())
     brandArray()
@@ -28,7 +28,7 @@ function FilterBar() {
     setFilterName({ ...filterName, [e.target.id]: e.target.innerText });
     setFilter(e.target.id);
 
-    console.log("zxczxczxc", filterName)
+    
   }
   //me filtra el array y me deja los brand sin repetir
   function brandArray() {

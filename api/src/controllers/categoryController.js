@@ -34,8 +34,15 @@ const addCategories = (req, res) => {
 // @route   GET /localhost:3001/categories
 // @access  Private/Admin
 const getCategories = asyncHandler(async (req, res) => {
+  const {pageNumber} = req.query;
+  let page;
   const pageSize = 15;
-  const page = Number(req.query.pageNumber) || 1;
+
+  if(pageNumber !== "undefined"){
+    page = Number(req.query.pageNumber);
+  } else {
+    page = 1;
+  }
 
   const keyword = req.query.keyword
     ? {

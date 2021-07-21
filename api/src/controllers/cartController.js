@@ -9,6 +9,9 @@ path = require('path');
 
 const getActiveCartFromUser = async (req, res) => {
   const { userId } = req.params;
+
+  if (userId === "undefined") return res.status(404).json({message:"undefined user"})
+   
   let cart = await Cart.findOne({ $and: [{ userId }, { state: "Active" }] });
   if (!cart) {
     const newCart = await Cart.create({

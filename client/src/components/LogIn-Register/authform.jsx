@@ -105,12 +105,7 @@ const AuthForm = () => {
         const token = res?.tokenId;
 
         try {
-            swal({
-                title: "Successfully Logged In with Google",
-                text: 'Welcome Back!',
-                icon: "success"
-            })
-            dispatch(googleLogIn(formData, history))
+            dispatch(googleLogIn(formData, history,swal))
         } catch (error) {
             console.log(error);
         }

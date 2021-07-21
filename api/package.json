@@ -4,7 +4,8 @@
   "description": "proyecto final herny bootcamp",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "dev": "nodemon -L",
+    "start": "node index.js",
     "forever": "forever index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },

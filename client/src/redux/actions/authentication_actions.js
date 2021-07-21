@@ -108,7 +108,7 @@ export const getUserById = (_id) => async(dispatch) => {
     }
 }
 //=====================================================================================//
-export const googleLogIn = (formData, history) => async(dispatch) => {
+export const googleLogIn = (formData, history, swalert) => async(dispatch) => {
     dispatch({
         type: GOOGLE_LOGIN
     });
@@ -124,10 +124,15 @@ export const googleLogIn = (formData, history) => async(dispatch) => {
             type: GOOGLE_LOGIN_SUCCESS,
             payload: u.data
         })
-        document.cookie=`isAdmin=${u.data?.result?.isAdmin}`
-        document.cookie=`_id=${u.data?.result?._id}` 
     })
     .then(() => history.push('/'))
+    .then(async()=> {
+        swalert({
+            title: 'Successfully Logged with Google',
+            text: 'Welcome Back!',
+            icon: `success`
+        })
+    })
     .catch((error)=>{
         dispatch({
             type:GOOGLE_LOGIN_ERROR,
