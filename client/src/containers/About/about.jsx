@@ -34,7 +34,7 @@ export default function About() {
                     <div className="flex justify-center mx-20 my-10">
                         <img className="w-32 h-32 rounded-full border-green-500 border-4" src={ImagenJuli} />
                         <div className="flex flex-col justify-center items-center">
-                            <p className="mx-10">Juli: Me gustan los gatitos, Javascript y la cerveza, te invito a ver mi github!</p>
+                            <p className="mx-10">Juliana Gonzalez:</p>
 
                             <button className="my-5 text-lg font-bold pl-2 pr-16 py-2 bg-transparent rounded-lg w-16 text-black-500 border-green-500 border-2 hover:bg-green-500" onClick={e => redirigir("https://github.com/julianactrl")}>Github</button>
 
@@ -62,7 +62,7 @@ export default function About() {
                     <div className="flex justify-center mx-20 my-10">
                         <img className="w-32 h-32 rounded-full border-green-500 border-4" src="https://avatars.githubusercontent.com/u/67129080?v=4" />
                         <div className="flex flex-col justify-center items-center">
-                            <p className="mx-10">Juan Agustin : Tengo 23 años , vivo en Mendoza Argentina ,soy desarrollador web full stack ,me encanta la tecnología y la innovación , y desarrollar apps para darle un aporte a la sociedad.</p>
+                            <p className="mx-10">Juan Agustin Reynaud: Tengo 23 años , vivo en Mendoza Argentina ,soy desarrollador web full stack ,me encanta la tecnología y la innovación , y desarrollar apps para darle un aporte a la sociedad.</p>
 
                             <button className="my-5 text-lg font-bold pl-2 pr-16 py-2 bg-transparent rounded-lg w-16 text-black-500 border-green-500 border-2 hover:bg-green-500" onClick={e => redirigir("https://github.com/AgustinReynaud")}>Github</button>
 
@@ -72,7 +72,7 @@ export default function About() {
                     <div className="flex justify-center mx-20 my-10">
                         <img className="w-32 h-32 rounded-full border-green-500 border-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScQ0gUFiWvt2SqU6kufMvSTPOYgYHS3ua0oivfLbJ1UCMcc9xZNqBWpD4TZW8AZc340Ug&usqp=CAU" />
                         <div className="flex flex-col justify-center items-center">
-                            <p className="mx-10">Jonathan : Me gusta el helado de chocolate bañado en chocolate en un conito de chocolate</p>
+                            <p className="mx-10">Jonathan </p>
 
                             <button className="my-5 text-lg font-bold pl-2 pr-16 py-2 bg-transparent rounded-lg w-16 text-black-500 border-green-500 border-2 hover:bg-green-500" onClick={e => redirigir("https://github.com/nohaynicksdisponibles")}>Github</button>
 
