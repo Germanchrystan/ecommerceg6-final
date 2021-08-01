@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { detailProduct } from "../../redux/actions/products_actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { addItem, addToCart, getCartFromUser } from "../../redux/actions/cart_actions";
+import { addItem
+//  , addToCart, getCartFromUser 
+} from "../../redux/actions/cart_actions";
 import {toggleProductFromWhishlist, getOrCreateWhishlistFromUser, isProductInWhishlist} from '../../redux/actions/whishlist_action';
 import UniversalNavBar from "../UniversalNavBar/universalNavBar";
 import Footer from "../../containers/Footer/footer";

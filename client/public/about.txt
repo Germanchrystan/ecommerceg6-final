@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Great Vibes
+- Font Author: Copyright (c) 2012 TypeSETit, LLC (typesetit@att.net), with Reserved Font Name "Great Vibes"
+- Font Source: http://fonts.gstatic.com/s/greatvibes/v8/RWmMoKWR9v4ksMfaWd_JN-XCg6UKDXlq.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL)
