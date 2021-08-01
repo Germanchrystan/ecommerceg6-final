@@ -1,6 +1,5 @@
 import * as api from '../api/index.js';
 import * as constants from "../constants";
-//const { REACT_APP_API } = 'https://e-commerce-g6-back.herokuapp.com/'; // En local comentar esta linea
 //=============================================================================//
 export const getAllProducts = (page,custom) => async (dispatch) => {
   dispatch({

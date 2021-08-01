@@ -20,7 +20,7 @@ function App() {
     <div className="bg-gray-200">
       <Routes />
         <ThemeProvider theme={theme}>
-          <Chatbot  />;
+          <Chatbot  />
         </ThemeProvider>
     </div>
   );

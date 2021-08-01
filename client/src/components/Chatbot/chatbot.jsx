@@ -1,6 +1,10 @@
 import React from "react";
 import ChatBot from "react-simple-chatbot";
 
+const url = "http://localhost:3000";
+//const url = "http://adalov-front.vercel.app";
+
+
 function Chatbot(props) {
   const config = {
     width: "400px",
@@ -41,17 +45,17 @@ function Chatbot(props) {
     },
     {
       id: "5",
-      component: (<div>Shop: <a href="http://localhost:3000/shop">Click Here</a></div>),
+      component: (<div>Shop: <a href={`${url}/shop`}>Click Here</a></div>),
       asMessage: true
     },
     {
       id: "6",
-      component: (<div>Custom T-Shirt: <a href="http://localhost:3000/design">Click Here</a></div>),
+      component: (<div>Custom T-Shirt: <a href={`${url}/design`}>Click Here</a></div>),
       asMessage: true
     },
     {
       id: "7",
-      component: (<div>Log in or Register here: <a href="http://localhost:3000/auth">Click Here</a></div>),
+      component: (<div>Log in or Register here: <a href={`${url}/auth`}>Click Here</a></div>),
       asMessage: true
     },
     {

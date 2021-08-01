@@ -1,42 +1,44 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import './footer.css'
+
 
 export default function Footer() {
     return (
-        <div className="tracking-wide font-bold
-        relative bottom-0">
-            <footer className="footer bg-black relative pt-1 border-b-2 border-black">
-                <div className="container mx-auto px-6">
+        <div className="footer-container" >
+            <footer className="footer-content">
+                <div className="container upper-footer">
 
                     <div className="sm:flex sm:mt-8">
-                        <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
-                            <div className="flex flex-col">
-                                <span className="font-bold text-white uppercase mb-2">Account</span>
-                                <span className="my-2 text-white"><Link to="/MyProfile" className="text-white">Your user account</Link></span>
-                                <span className="my-2 text-white"><Link to="/MyProfile/Edit" className="text-white">Edit your account</Link></span>
-                                <span className="my-2 text-white"><Link to="/Order" className="text-white">Your Orders</Link></span>
+                        <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 footer-categories">
+                            <div className="footer-category">
+                                <span className="footer-category-title">Account</span>
+                                <span className="footer-category-item"><Link to="/MyProfile" className="footer-link">Your user account</Link></span>
+                                <span className="footer-category-item"><Link to="/MyProfile/Edit" className="footer-link">Edit your account</Link></span>
+                                <span className="footer-category-item"><Link to="/Order" className="footer-link">Your Orders</Link></span>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="font-bold text-white uppercase mt-4 md:mt-0 mb-2">About</span>
-                                <span className="my-2 text-white"><Link to="/About" className="text-white">About us</Link></span>
-                                <span className="my-2 text-white"><Link to="/Terms" className="text-white">Terms of use</Link></span>
-                                <span className="my-2 text-white"><Link to="/Privacy" className="text-white">Privacy Policy</Link></span>
+                            <div className="footer-category">
+                                <span className="footer-category-title">About</span>
+                                <span className="footer-category-item"><Link to="/About" className="footer-link">About us</Link></span>
+                                <span className="footer-category-item"><Link to="/Terms" className="footer-link">Terms of use</Link></span>
+                                <span className="footer-category-item"><Link to="/Privacy" className="footer-link">Privacy Policy</Link></span>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="font-bold text-white uppercase mt-4 md:mt-0 mb-2">Contact us</span>
-                                <span className="my-2 text-white"><a href="https://www.facebook.com/" className="text-white  text-md ">Facebook</a></span>
-                                <span className="my-2 text-white"><a href="https://www.twitter.com/" className="text-white  text-md ">Twitter</a></span>
-                                <span className="my-2 text-white"><a href="https://www.instagram.com/" className="text-white  text-md ">Instagram</a></span>
+                            <div className="footer-category">
+                                <span className="footer-category-title">Contact us</span>
+                                <span className="footer-category-item"><a href="https://www.facebook.com/" className="footer-link">Facebook</a></span>
+                                <span className="footer-category-item"><a href="https://www.twitter.com/" className="footer-link">Twitter</a></span>
+                                <span className="footer-category-item"><a href="https://www.instagram.com/" className="footer-link">Instagram</a></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="container mx-auto px-6">
-                    <div className="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-                        <div className="sm:w-2/3 text-center py-6">
-                            <p className="text-sm text-white font-bold mb-2">
+                <div className=" bottom-footer container">
+                    <div className="copyright-container" >
+                        <div className="copyright-text-container">
+                            <p className="copyright-text">
                                 © 2021 by HENRY STUDENTS
-                </p>
+                            </p>
                         </div>
                     </div>
                 </div>

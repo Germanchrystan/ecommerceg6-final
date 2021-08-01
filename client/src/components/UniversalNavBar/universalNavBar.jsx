@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { searchProducts } from '../../redux/actions/products_actions'
 import decode from "jwt-decode";
-import { Link, useLocation, useHistory, Route, Switch } from "react-router-dom";
-import "./universalNavBar.css";
-import { useDispatch, useSelector } from "react-redux";
-import home from '../../assets/home.png'
 import logoTransparent from "../../assets/logo_transparent.png"
 import swal from 'sweetalert';
 import carroHome from '../../assets/carroHome.png'
-import { searchProducts } from '../../redux/actions/products_actions'
 import corona from "../../assets/corona.jpg";
+
+import "./universalNavBar.css";
 
 export default function UniversalNavBar(props) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-
   const history = useHistory();
   const location = useLocation();
 
   const dispatch = useDispatch();
-  // let productsArray = useSelector(
-  //   (state) => state.productsReducer.allProducts.products
-  // );
 
-  const [input, setInput] = useState({
-    name: "",
-  });
+  const [input, setInput] = useState({name: ""});
+
   const [selectedProduct, setSelectedProduct] = useState(false);
 
   useEffect(() => {
@@ -31,7 +26,6 @@ export default function UniversalNavBar(props) {
     if (token) {
       const decodedToken = decode(token);
       setUser(JSON.parse(localStorage.getItem("profile")));
-      //if (decodedToken.exp * 1000 < new Date().getTime()) console.log("Session expired!")
     }
 
     if (input.name !== "") {
@@ -39,33 +33,10 @@ export default function UniversalNavBar(props) {
     }
   }, [location, input]);
 
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-
-    history.push("/shop");
-
-    setUser(null);
-  };
-
-  function myFunction() {
-    var x = document.getElementById("myTopnav");
-    console.log("entra!!");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
-    }
-  }
-
   const completeInput = (name) => {
     setInput({ ...input, name: name });
     setSelectedProduct(true);
   };
-
-  //------------SEARCH BAR--------------------
-  // const [input, setInput] = useState({
-  //   name: "",
-  // })
 
   function handleChange(e) {
     setInput({
@@ -82,10 +53,6 @@ export default function UniversalNavBar(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // if (input.name) {
-    //   dispatch(searchProducts(input.name))
-
-    // } else
     if (input.name === "") {
       swal({
         title: "Search Not Valid",
@@ -98,53 +65,33 @@ export default function UniversalNavBar(props) {
   }
 
   return (
-    <div className="">
+    <div className="header-container">
 
-      <header className="header tracking-wide font-bold text-center">
-        <Link to="/" className="logo">
+      <header className="header tracking-wide">
+        <Link to="/" className="logo-link">
         {
             window.location.pathname === "/" &&
 
-            <img alt="logo" src={logoTransparent} style={{ position: "absolute", top: "-12px", left: "15px", width: "200px" }}></img>
+            <img alt="logo" className="logo-original" src={logoTransparent} ></img>
 
           }
           {
             window.location.pathname !== "/" &&
-
-            <img alt="logo" src={corona} style={{ position: "absolute", top: "30px", left: "15px", width: "65px" }}></img>
-
+            <img alt="logo" className="logo-alt" src={corona}></img>
           }
 
         </Link>
 
         <input className="menu-btn" type="checkbox" id="menu-btn" />
-        {/* <Route
-          path="/shop"
-          render={({ match }) => {
-            // Do whatever you want with the match...
-            return (
-              <input
-                onKeyPress={handleKeyPress}
-                className="mt-3 mb-3 w-48 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none "
-                type="search"
-                name="search"
-                autoComplete="true"
-                placeholder="Search"
-                value={input.name}
-                onChange={(e) => handleChange(e)}
-              />
-            );
-          }}
-        /> */}
-
         <label className="menu-icon" for="menu-btn">
           <span className="navicon"></span>
         </label>
         {window.location.pathname === "/Shop" && (
-          <div id="responsiveSearch" className=" flex flex-col  lg:ml-96 ml-24   absolute">
+          <div id="responsiveSearch" style={{display:'flex', width:'fit-content'}} className=" flex-col lg:ml-96 ml-24 ">
             <input
               onKeyPress={handleKeyPress}
-              className="mt-3 mb-3 w-44 lg:w-80 md:w-60 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none "
+              className="w-44 lg:w-80 md:w-60 border-2 border-gray-300 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none "
+              style={{margin:'0.75rem 0', background:'white', borderWidth: '2px'}}
               type="search"
               name="search"
               placeholder="Search"
@@ -155,26 +102,24 @@ export default function UniversalNavBar(props) {
 
           </div>
         )}
-        <ul className="menu">
-          <li className="-py-2">
+        <ul className="menu">  
+        {/* style={{position:'relative', top:'10%', right:0}} */}
+          <li className="header-menu-item">
             <Link to="/Shop">Shop</Link>
           </li>
-          {/* <li className="-py-2">
-            <Link to="/design">Create T-Shirt</Link>
-          </li> */}
           {user?.result?.username ? (
-            <li className="-py-2">
+            <li className="header-menu-item">
               <Link to="/myProfile">{user.result.username}</Link>
             </li>
           ) : (
-            <li>
+            <li className="header-menu-item">
               <Link to="/auth">Log In</Link>
             </li>
           )}
 
           {user?.result?._id ? (
-            <li>
-              <Link to={"/cart/" + user.result._id}>
+            <li className="header-menu-item">
+              <Link to={`/cart/${user.result._id}`}>
                 <img
                   className="mx-auto"
                   width="24px"
@@ -185,7 +130,7 @@ export default function UniversalNavBar(props) {
               </Link>
             </li>
           ) : (
-            <li>
+            <li className="header-menu-item">
               <Link to={"/cart/"}>
                 <img
                   className="mx-auto"
