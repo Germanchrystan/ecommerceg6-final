@@ -1,15 +1,29 @@
+DONE
 -Remove traces from custom shirts
--Use Categories as Tags
-
 Cart
--Fix Removing item from Cart
+-Fix Removing item from Cart 
 -Fix adding or removing unit from product from Cart
+
+-Fixing position of footer 
+
+-Add Spinner while Catalog and UserDetail Loads
+-Add Brand as Model
+
+--------------------------------------------------------------
+TODO
+-Add Tags
+
+-Test Brand CRUD with Postman
+-See Brands in FrontEnd
+-Link Brand Model with products
 
 Discounts
 -Fixing the front of the discount removal
 -Let the chatbot show a random discount
 
 FrontEnd
--Fixing position of footer 
 -Fix Whishlist button
+
+-Move Filter Bar to the Side
+-Change Catalog from grid to flex
 

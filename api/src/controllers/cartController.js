@@ -329,14 +329,15 @@ const getAllCarts = asyncHandler(async (req, res) => {
 
   if(state === "undefined" || !state){
     stateOrder = {}
-}else{
-  stateOrder = {
-    state: {
-      $regex: state,
-      $options: "i",
+  }else{
+    stateOrder = {
+      state: {
+        $regex: state,
+        $options: "i",
+      }
     }
-}
-}
+  }
+  
   let quantityArray = [];
   const count = await Cart.countDocuments({ ...stateOrder });
   const carts = await Cart.find({ ...stateOrder })

@@ -2,8 +2,6 @@ const Category = require("./../models/Category");
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 
-
-
 // @desc    Create a category
 // @route   POST /localhost:3001/categories
 // @access  Private/Admin

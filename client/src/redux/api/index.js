@@ -100,3 +100,9 @@ export const addProductToWhishlist = (userId, productId) => API.post(`/whishlist
 export const removeProducFromWhishlist = (userId, productId) => API.put(`/whishlists/${userId}/${productId}`); 
 export const toggleProductFromWhishlist = (userId, productId) => API.put(`/whishlists/toggle/${userId}/${productId}`);
 export const isProductInWhishlist = (userId, productId) => API.get(`/whishlists/includes/${userId}/${productId}`);
+
+//BRAND
+export const getBrands = () => API.get(`/brands`);
+export const getBrandById = (id) => API.get(`/brands/${id}`);
+export const addBrand = (brandBody) => API.post(`/brands`,brandBody);
+export const removeBrand = (id) => API.delete(`/brands/${id}`);
