@@ -6,7 +6,7 @@ Cart
 
 -Fixing position of footer 
 
--Add Spinner while Catalog and UserDetail Loads
+-Add Spinner while Catalog, ProductDetail and UserDetail Loads
 -Add Brand as Model
 
 --------------------------------------------------------------

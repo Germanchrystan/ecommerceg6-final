@@ -33,10 +33,13 @@ export const searchProducts = (name) => async(dispatch) => {
 }
 //=============================================================================//
 export const detailProduct = (id) => async(dispatch)=> {
+  dispatch({
+    type: constants.DETAIL_PRODUCT
+  })
   return await api.detailProduct(id)
   .then((res) => {
     dispatch({ 
-      type: constants.DETAIL_PRODUCT, 
+      type: constants.DETAIL_PRODUCT_SUCCESS, 
       payload: res.data 
     });
   })

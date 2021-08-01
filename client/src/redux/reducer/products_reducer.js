@@ -23,9 +23,7 @@ const productsReducer = (state = initialState, action) => {
     case constants.ADD_PRODUCT_ERROR:
       return { ...state, addProduct: null, isLoading: false, error: true }
     case constants.EDIT_PRODUCT:
-      return {
-        ...state,
-        allProducts: state.allProducts.products.map((prod) => {
+      return { ...state, allProducts: state.allProducts.products.map((prod) => {
           if (action.payload.id === prod.id) {
             prod = {
               ...prod,
@@ -43,7 +41,9 @@ const productsReducer = (state = initialState, action) => {
     case constants.DELETE_PRODUCT:
       return {...state, allProducts: state.allProducts.products.filter((prod) => prod.id !== action.payload)}
     case constants.DETAIL_PRODUCT:
-      return { ...state, allProducts: action.payload };
+      return {...state, allProducts:null, isLoading:true, error:null}
+    case constants.DETAIL_PRODUCT_SUCCESS:
+      return { ...state, allProducts: action.payload, isLoading:false};
     case constants.SEARCH_PRODUCTS:
       return { ...state, allProducts: action.payload };
     case constants.FILTER_BY_NAME:
