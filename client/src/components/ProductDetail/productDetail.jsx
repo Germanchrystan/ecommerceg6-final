@@ -5,7 +5,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { addItem
 //  , addToCart, getCartFromUser 
 } from "../../redux/actions/cart_actions";
-import {toggleProductFromWhishlist, getOrCreateWhishlistFromUser, isProductInWhishlist} from '../../redux/actions/whishlist_action';
+import {toggleProductFromWhishlist, getOrCreateWhishlistFromUser } from '../../redux/actions/whishlist_action';
 import UniversalNavBar from "../UniversalNavBar/universalNavBar";
 import Footer from "../../containers/Footer/footer";
 import swal from "sweetalert";
@@ -19,43 +19,27 @@ function DetailProduct() {
   
   var { id } = useParams();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [whishlistBool, setWhishlistBool] = useState(undefined);
   
   const history = useHistory();
-  const whishlistData = useSelector(
-    (state) => state.whishlistReducer
-  );
   const dispatch = useDispatch();
 
   const [userCart, setUserCart] = useState([]);
-  
-  useEffect(() => {
-    dispatch(detailProduct(id));
-    dispatch(filterById(id));
- 
-    const checkWhishlist = async()=>{
-      if(user?.result?._id){
-        dispatch(getOrCreateWhishlistFromUser(user.result?._id))
-        dispatch(isProductInWhishlist(user.result?._id, id))
-        setWhishlistBool(whishlistData?.includes)
-      }else {
-        setWhishlistBool(undefined)
-      }
-    }
-    checkWhishlist();
-    console.log("FROM STATE", whishlistBool)
-    console.log("FROM REDUCER", whishlistData?.includes)
-  }, [id,dispatch]);
-
   const [reviewCreated, setReviewCreated] = useState(false);
- 
-  const reviewId = useSelector(
-    (state) => state.reviewReducer.allReviews?.reviews
-  )
 
   const productsArray = useSelector(
     (state) => state.productsReducer.allProducts
   );
+  
+  useEffect(() => {
+    dispatch(detailProduct(id))
+    dispatch(filterById(id))
+    
+  }, [id,dispatch]);
+
+ 
+  const reviewId = useSelector(
+    (state) => state.reviewReducer.allReviews?.reviews
+  )
   const isLoading = useSelector(
     (state) => state.productsReducer?.isLoading
   );
@@ -142,7 +126,6 @@ function DetailProduct() {
 
   function toggleWhishlist(){
     dispatch(toggleProductFromWhishlist(user?.result?._id, id , history))
-    setWhishlistBool((prev) => !prev)
   }
 
 
@@ -207,9 +190,9 @@ function DetailProduct() {
                     {productsArray.name}
                   </h1>
                   {
-                  (whishlistBool!==undefined) && 
+                  (productsArray.isInWhishlist !== null ) && 
                     <div className="pl-5 "style={{cursor:"pointer"}} onClick={toggleWhishlist}>
-                      <i class={`fa${whishlistBool? "r" : "s"} fa-heart`}></i> 
+                      <i class={`fa${productsArray.isInWhishlist ? "s" : "r"} fa-heart`}></i> 
                     </div>
                   }
                 </div>

@@ -24,7 +24,7 @@ function Catalogo() {
     setPage(page - 1);
   };
   // console.log("ESTE ES EL ARRAY DE CATALOGO", productsArray)
-  if (productsArray.keyword === true && productsArray.products.length === 0) {
+  if (productsArray?.keyword === true && productsArray.products.length === 0) {
     productsArray.keyword = false
     swal({
       title: "Product not found!",

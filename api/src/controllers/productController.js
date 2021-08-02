@@ -1,4 +1,4 @@
-const Product = require("./../models/Product");
+const jwt = require('jsonwebtoken');
 const { transporter } = require("../mailer");
 var EmailTemplate = require('email-templates-v2').EmailTemplate;
 const asyncHandler = require("express-async-handler");
@@ -7,6 +7,10 @@ const path = require("path");
 const fs = require("fs");
 const Stock = require("../models/Stock");
 const { where } = require("../models/Order");
+
+const Product = require("./../models/Product");
+const User = require("./../models/User");
+const Whishlist = require("./../models/Whishlist");
 
 
 // @desc    Fetch all products
@@ -61,19 +65,60 @@ const getProducts = asyncHandler(async (req, res, next) => {
     res.json({ products, current: page, pages: Math.ceil(count / pageSize), keyword: false });
   }
 });
+//===================================================================================//
+const getProductsById = async(req, res) => {
+  const { id } = req.params;
+  //Initializing a variable that will hold the whishlist bool  
+  let isInWhishlist = null;
+  //Getting token from headers (sent by API axios interceptor)
+  const token = req.headers.authorization.split(' ')[1];
+  //If there is a token, decode the userId and check the users whishlist
+  if(token){
+    //Decoding user id
+    decodedData = jwt.verify(token, 'test');
+    req.userId = decodedData?.id;
+    //Getting the whishlist
+    const whishlist = await Whishlist.findOne({userId: req.userId})  
+    //If there is a whishlist check if it has the product
+    if(whishlist){
+      const productIndexInWhishlist = whishlist.products.findIndex((p) => p.productId.equals(id))
+      if(productIndexInWhishlist > -1){
+        isInWhishlist = true
+      } else {
+        isInWhishlist = false;
+      }    
+    } else {
+      isInWhishlist = false;
+    }
+  }
 
-const getProductsById = (req, res) => {
-  Product.findById(req.params.id)
+  Product.findById(id)
     .populate("productReview")
     .populate("stock")
     .then((product) => {
       if (!product) {
         return res.status(404).end();
       }
+      // product = {...product, isInWhishlist};
+      // // console.log(product)
+      product = { // This is an awful way of adding the isInWhishlist boolean. Remember to change this later
+        discount: product.discount,
+        img: product.img,
+        categories: product.categories,
+        stock: product.stock,
+        name: product.name,
+        _id: product._id,
+        description: product.description,
+        price: product.price,
+        productReview: product.productReview,
+        genre: product.genre,
+        brand: product.brand,
+        isInWhishlist
+      }
       return res.status(200).json(product);
     });
 };
-
+//===================================================================================//
 //filtra por brand, size,color,genre
 const getProductsFilter = (req, res, next) => {
   let filter = req.query.brand || req.query.size || req.query.genre || req.query.price;

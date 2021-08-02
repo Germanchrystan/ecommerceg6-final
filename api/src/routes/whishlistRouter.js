@@ -5,7 +5,7 @@ const {
     addProductToWhishlist,
     removeProductFromWhishlist,
     toggleProductFromWhishlist,
-    isProductInWhishlist
+
 } = require('../controllers/whishlistController')
 
 // -------------------------ROUTES Whishlist------------------------------- //
@@ -17,8 +17,6 @@ server.post('/:userId/:productId', addProductToWhishlist);
 server.put('/:userId/:productId', removeProductFromWhishlist);
 //==========================================================================//
 server.put('/toggle/:userId/:productId', toggleProductFromWhishlist)
-//==========================================================================//
-server.get('/includes/:userId/:productId', isProductInWhishlist)
 //==========================================================================//
 
 module.exports = server ; 

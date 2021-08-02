@@ -6,7 +6,7 @@ const cors = require("cors");
 require("dotenv").config();
 require("./db.js");
 const server = express();
-const routes = require("./routes/index.js");
+const routes = require("./routes/index.js"); 
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
