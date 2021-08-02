@@ -1,17 +1,16 @@
 const jwt = require('jsonwebtoken');
-const { transporter } = require("../mailer");
-var EmailTemplate = require('email-templates-v2').EmailTemplate;
+// const { transporter } = require("../mailer");
+// var EmailTemplate = require('email-templates-v2').EmailTemplate;
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const Stock = require("../models/Stock");
-const { where } = require("../models/Order");
+//const { where } = require("../models/Order");
 
 const Product = require("./../models/Product");
 const User = require("./../models/User");
 const Whishlist = require("./../models/Whishlist");
-
 
 // @desc    Fetch all products
 // @route   GET localhost:3001/products
@@ -93,6 +92,7 @@ const getProductsById = async(req, res) => {
         isInWhishlist = false;
       }
     }
+    //I should add a similar process to check if the user can review the product
   }
 
   Product.findById(id)
@@ -102,8 +102,7 @@ const getProductsById = async(req, res) => {
       if (!product) {
         return res.status(404).end();
       }
-      // product = {...product, isInWhishlist};
-      // // console.log(product)
+
       product = { // This is an awful way of adding the isInWhishlist boolean. Remember to change this later
         discount: product.discount,
         img: product.img,

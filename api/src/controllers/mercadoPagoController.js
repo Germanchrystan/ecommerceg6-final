@@ -1,6 +1,6 @@
-const Cart = require('./../models/Cart.js');
 const { transporter } = require("../mailer");
 const server = require('express').Router();
+const Cart = require('./../models/Cart.js');
 
 // SDK de Mercado Pago
 const mercadopago = require('mercadopago');

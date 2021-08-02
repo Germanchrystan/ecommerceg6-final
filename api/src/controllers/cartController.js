@@ -1,10 +1,10 @@
+path = require('path');
+const asyncHandler = require("express-async-handler");
+var EmailTemplate = require('email-templates-v2').EmailTemplate;
 const { ObjectId } = require("bson");
+const { transporter } = require("../mailer");
 const Cart = require("./../models/Cart");
 const Product = require("./../models/Product");
-const { transporter } = require("../mailer");
-var EmailTemplate = require('email-templates-v2').EmailTemplate;
-const asyncHandler = require("express-async-handler");
-path = require('path');
 //==========================================================================//
 
 const getActiveCartFromUser = async (req, res) => {

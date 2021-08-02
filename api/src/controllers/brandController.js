@@ -1,6 +1,6 @@
+const mongoose = require("mongoose");
 const Brand = require('./../models/Brand');
 const Product= require('./../models/Product');
-
 //==========================================================================//
 const getBrands = async(req, res) => {
     const brands = await Brand.find({})
@@ -13,7 +13,7 @@ const getBrandById = async(req, res) => {
     
     if (!brand) return res.status(404).json({message:'Brand Not Found'});
 
-    return res.status(200).json({})
+    return res.status(200).json(brand)
 }
 //==========================================================================//
 const addBrand = async(req,res) => {
@@ -55,10 +55,10 @@ const removeBrand = async(req,res) => {
     const { _id } = req.params;
     
     //Brand shouldnt be removed if there are still products in the catalog with by that brand
-    const areThereProducts = await Product.findOne({ brand });
-    if(areThereProducts) return res.status(400).json({message:"Can't remove brand if it still has products on the database"})
+    // const areThereProducts = await Product.findOne({ brand });
+    // if(areThereProducts) return res.status(400).json({message:"Can't remove brand if it still has products on the database"})
 
-    const brand = await Category.findOne({_id});
+    const brand = await Brand.findOne({_id});
 
     if (brand) {
       await brand.remove();
