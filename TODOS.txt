@@ -9,6 +9,7 @@ Cart
 -Add Spinner while Catalog, ProductDetail and UserDetail Loads
 -Add Brand as Model
 
+-Fix Whishlist button
 --------------------------------------------------------------
 TODO
 -Add Tags
@@ -22,8 +23,7 @@ Discounts
 -Let the chatbot show a random discount
 
 FrontEnd
--Fix Whishlist button
-
+- Check Whishlist Reducer.
 -Move Filter Bar to the Side
 -Change Catalog from grid to flex
 
