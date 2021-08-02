@@ -70,25 +70,28 @@ const getProductsById = async(req, res) => {
   const { id } = req.params;
   //Initializing a variable that will hold the whishlist bool  
   let isInWhishlist = null;
-  //Getting token from headers (sent by API axios interceptor)
-  const token = req.headers.authorization.split(' ')[1];
-  //If there is a token, decode the userId and check the users whishlist
-  if(token){
-    //Decoding user id
-    decodedData = jwt.verify(token, 'test');
-    req.userId = decodedData?.id;
-    //Getting the whishlist
-    const whishlist = await Whishlist.findOne({userId: req.userId})  
-    //If there is a whishlist check if it has the product
-    if(whishlist){
-      const productIndexInWhishlist = whishlist.products.findIndex((p) => p.productId.equals(id))
-      if(productIndexInWhishlist > -1){
-        isInWhishlist = true
+  if(req.headers.authorization){
+    //Getting token from headers (sent by API axios interceptor)
+    const token = req.headers.authorization.split(' ')[1];
+
+    //If there is a token, decode the userId and check the users whishlist
+    if(token){
+      //Decoding user id
+      decodedData = jwt.verify(token, 'test');
+      req.userId = decodedData?.id;
+      //Getting the whishlist
+      const whishlist = await Whishlist.findOne({userId: req.userId})  
+      //If there is a whishlist check if it has the product
+      if(whishlist){
+        const productIndexInWhishlist = whishlist.products.findIndex((p) => p.productId.equals(id))
+        if(productIndexInWhishlist > -1){
+          isInWhishlist = true
+        } else {
+          isInWhishlist = false;
+        }    
       } else {
         isInWhishlist = false;
-      }    
-    } else {
-      isInWhishlist = false;
+      }
     }
   }
 

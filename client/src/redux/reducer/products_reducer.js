@@ -74,6 +74,8 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, allProducts: action.payload, isLoading: false, error: null }
     case constants.DISAPPROVE_CUSTOM_PRODUCT_ERROR:
       return { ...state, allProducts: null, isLoading: false, error: action.payload }
+    case constants.TOGGLE_PRODUCT_IN_WHISHLIST_SUCCESS:
+      return { ...state, allProducts: {...state.allProducts, isInWhishlist: !state.allProducts?.isInWhishlist}};
     default:
       return state;
   }
