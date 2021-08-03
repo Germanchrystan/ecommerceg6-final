@@ -55,6 +55,16 @@ export default function AdminAction() {
                                     </Link>
                                 </td>
                             </tr>
+
+                            <tr className="hover:bg-grey-lighter">
+                                <td className="py-4 px-6 border-b border-grey-light  focus:outline-none hover:bg-gray-200 rounded">Brand Table</td>
+                                <td className="py-4 px-6 border-b border-grey-light">
+                                    <Link to="/brands">
+                                    <button type="submit" title="Make Admin, Edit or Delete Brands" className="flex text-white bg-green-700 border-0  mt-4 py-2 px-6 w-20 h-10 focus:outline-none hover:bg-green-800 rounded" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg></button>
+                                    </Link>
+                                </td>
+                            </tr>
+
                             <tr className="hover:bg-grey-lighter">
                                 <td className="py-4 px-6 border-b border-grey-light  focus:outline-none hover:bg-gray-200 rounded">Orders Table</td>
                                 <td className="py-4 px-6 border-b border-grey-light">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategories, deleteCategory, searchCategory } from "./../../redux/actions/category_actions";
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import swal from 'sweetalert';
 
 const CategoryTable = () => {

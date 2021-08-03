@@ -13,7 +13,6 @@ import PostCategory from "./components/CrudCategory/categoryPost.jsx";
 import CategoryEdit from "./components/CrudCategory/categoryEdit.jsx";
 import AddCategory from "./containers/AllCategories/allCategory.jsx";
 import About from "./containers/About/about";
-// import Cart from "./components/Cart/cart"
 import UserTableEdit from "./components/UserEdit/usersTableEdit";
 import UserEdit from "./components/UserEdit/userEdit";
 import UsersTable from "./components/UsersTable/usersTable";
@@ -33,8 +32,8 @@ import AddAddressForm from './components/UserEdit/addAddressForm';
 import HistorialCompras from "./containers/HistorialCompras/historialCompras"
 import CarroDetallado from "./containers/CarroDetallado/carroDetallado"
 import TshirtFeature from "./components/T-Shirt/tshirtFeature";
-// import CustomCatalog from "./components/Catalog/customCatalog";
-
+import BrandTable from './components/BrandTable/brandTable';
+import BrandPostForm from './components/CrudBrand/brandPost';
 
 export default function Routes() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -137,6 +136,12 @@ export default function Routes() {
       </Route>
       <Route exact path="/orders/state/:id">
         <OrderState />
+      </Route>
+      <Route exact path="/brands" >
+        <BrandTable />
+      </Route>
+      <Route exact path="/postBrand" >
+        <BrandPostForm />
       </Route>
       </div>}
     </Switch>

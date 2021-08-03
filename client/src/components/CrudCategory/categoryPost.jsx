@@ -1,16 +1,14 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { addCategory } from "../../redux/actions/category_actions";
-import "../Catalog/catalog.css"
 import UniversalNavBar from "../UniversalNavBar/universalNavBar";
 import Footer from "../../containers/Footer/footer";
 import swal from 'sweetalert'
+import "../Catalog/catalog.css"
 
+//ADD HISTORY TO POST ACTION
 const ProductPostForm = () => {
     const dispatch = useDispatch();
-
-
     const newCategory = {
         name: "",
         description: "",
@@ -35,8 +33,6 @@ const ProductPostForm = () => {
         };
         dispatch(addCategory(categorySend));
         setCategory(newCategory)
-        window.location.replace("http://localhost:3000/categories")
-        /*   alert("Activity successfullty created"); */
         //--------VALIDACION-------------------------------
         if (category.name === '') return swal({
             title: "Name Field Cannot Be Empty",

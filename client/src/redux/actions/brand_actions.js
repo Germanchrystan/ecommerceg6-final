@@ -39,7 +39,7 @@ export const getBrandById = (id) => async(dispatch) => {
     })
 }
 
-export const addBrand = (brandBody) => async(dispatch) => {
+export const addBrand = (brandBody, history, swal) => async(dispatch) => {
     dispatch({
         type: constants.ADD_BRAND
     })
@@ -49,11 +49,24 @@ export const addBrand = (brandBody) => async(dispatch) => {
             type: constants.ADD_BRAND_SUCCESS,
             payload: brand.data
         })
+    }) 
+    .then(async()=> {
+        swal({
+            title: "Brand Added",
+            text: 'Welcome!',
+            icon: `success`
+        })
     })
+    .then(() => history.push('/brands'))
     .catch((error) => {
         dispatch({
             type: constants.ADD_BRAND_ERROR,
             payload: error.response?.data
+        })
+        swal({
+            title: error?.response?.data?.message || "There was an error",
+            text: 'Try again!',
+            icon: `warning`
         })
     })
 }

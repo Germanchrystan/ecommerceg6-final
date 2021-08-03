@@ -24,6 +24,7 @@ Discounts
 
 FrontEnd
 - Check Whishlist Reducer.
--Move Filter Bar to the Side
--Change Catalog from grid to flex
+- Move Filter Bar to the Side
+- Change Catalog from grid to flex
 
+-Add useHistory to action in categorypost(REPLACE HARDCODED ROUTE!)
