@@ -19,7 +19,23 @@ export default function About() {
                             <div className="flex justify-center">
                                 <img className="w-80" src={ImagenAbout} />
                             </div>
-                            <p className="px-20 py-10 text-justify">We are constantly striving to improve our business by introducing new products, improving our staff and constantly expanding our range. Our main target market is the Australian consumer, but we constantly source overseas customers as well. Our vision is to become a global fashion brand that will appeal to every fashion lover around the world. </p>
+                            <p className="px-20 py-10 text-justify">
+                                This is our final proyect in the Full Stack Web Developer Bootcamp conducted by Henry. 
+                                <br />
+                                The Backend was made with MongoDB, ExpressJs and Node
+                                <br />
+                                The Frontend was made with ReactJs and Redux 
+                                <br />
+                                The styling of the frontend was made with Tailwind CSS and CSS
+                                <br />
+                                Two external API's were used: 
+                                -Mercado Pago's API in order to handle the payments.
+                                -API in order to set real addresses for users in Argentina.
+                                <br />
+                                Made in May of 2021.
+                                <br />
+                                Revised, debugged and finished in July of 2021 by Germán Chrystan.   
+                            </p>
                         </div>
                     </div>
                     <div className="flex justify-center mx-20">

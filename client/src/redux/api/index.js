@@ -65,6 +65,8 @@ export const editStock = (payload,stock) => API.put(`/products/stock/${payload}`
 export const deleteStock = (payload) => API.delete(`/products/delete/stock/${payload}`)
 export const addProductDiscount = (productId, percentage) => API.post(`/products/discount/${productId}`, percentage)
 export const removeProductDiscount = (productId) => API.put(`/products/discount/${productId}`);
+export const getRandomDiscount = () => API.get('/products/discount/random');
+export const getRandomDiscountByKeyword = (keyword) => API.get(`/products/discount/random/${keyword}`);
 
 //USER
 export const getUsers = (page) => API.get(`/users?page=${page}`);

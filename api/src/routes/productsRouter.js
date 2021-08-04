@@ -13,6 +13,8 @@ const {
   imageUpload,
   addDiscount,
   removeDiscount,
+  getRandomDiscount,
+  getRandomDiscountByKeyword
 } = require("../controllers/productController");
 
 
@@ -30,5 +32,7 @@ server.get('/image/:name', imageUpload);
 server.post('/discount/:productId', addDiscount);
 server.put('/discount/:productId', removeDiscount);
 
+server.get('/discount/random', getRandomDiscount)
+server.get('/discount/random/:keyword', getRandomDiscountByKeyword)
 
 module.exports = server;

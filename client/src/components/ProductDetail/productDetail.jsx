@@ -237,17 +237,10 @@ function DetailProduct() {
                   })
                   }
 
-                  {reviewCreated === false && userCart && userCart?.carts?.length > 0 && userCart?.carts?.map(prop => {
-                    if (prop.state === "Delivered") {
-                      if(prop.items.find(p => p.productId === id)){
-                        return (
-                          <Link to={"/reviews/add/" + productsArray._id}>
-                            <span className="text-gray-600 ml-3 text-lg">Add Review</span>
-                          </Link>
-                        )
-                      }
-                    }
-                  })
+                  {productsArray.canReview &&
+                    <Link to={"/reviews/add/" + productsArray._id}>
+                      <span className="text-gray-600 ml-3 text-lg">Add Review</span>
+                    </Link>
                   }
                 </div>
                 <p class="leading-relaxed pl-3">{productsArray.description}</p>

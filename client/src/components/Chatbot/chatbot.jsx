@@ -1,6 +1,6 @@
 import React from "react";
 import ChatBot from "react-simple-chatbot";
-
+import { getRandomDiscount } from './../../redux/api/index';
 const url = "http://localhost:3000";
 //const url = "http://adalov-front.vercel.app";
 
@@ -39,7 +39,7 @@ function Chatbot(props) {
         { value: "Custom T-Shirt", label: "Custom T-Shirt", trigger: "6" },
         { value: "Log In / Register", label: "Log in / Register", trigger: "7" },
         { value: "Contact", label: "Contact", trigger: "8" },
-
+        { value: "Discount", label: "Discount", trigget: "9" },
         { value: "Not now", label: "Not now", trigger: "Done" },
       ]
     },
@@ -61,6 +61,12 @@ function Chatbot(props) {
     {
       id: "8",
       component: (<div>Here is our E-Mail: <a href="mailto: ecommerceg6@gmail.com">ecommerceg6@gmail.com</a></div>),
+      asMessage: true
+    },
+    { 
+      id:"9",
+      //CORRECT
+      component: (<div>{getRandomDiscount().data?.message}. Check it out <a href="#">here</a></div>),
       asMessage: true
     },
     {

@@ -1,5 +1,6 @@
 DONE
 -Remove traces from custom shirts
+
 Cart
 -Fix Removing item from Cart 
 -Fix adding or removing unit from product from Cart
@@ -8,19 +9,21 @@ Cart
 
 -Add Spinner while Catalog, ProductDetail and UserDetail Loads
 -Add Brand as Model
-
+-Add Brand frontend table and Brand post form
 -Fix Whishlist button
+-Test Brand CRUD with Postman
+-See Brands in FrontEnd
+
+-Product Controllers to return random discount 
+-Add review button fixed in product detail
 --------------------------------------------------------------
 TODO
 -Add Tags
-
--Test Brand CRUD with Postman
--See Brands in FrontEnd
 -Link Brand Model with products
 
 Discounts
 -Fixing the front of the discount removal
--Let the chatbot show a random discount
+-Let the chatbot show a random discount (CORRECT)
 
 FrontEnd
 - Check Whishlist Reducer.
@@ -28,3 +31,7 @@ FrontEnd
 - Change Catalog from grid to flex
 
 -Add useHistory to action in categorypost(REPLACE HARDCODED ROUTE!)
+
+Code Style
+-Add comments to all controllers
+-Add comments to all routes

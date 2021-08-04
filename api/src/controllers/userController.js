@@ -14,7 +14,9 @@ const login = async (req, res) => {
         if (!oldUser) return res.status(404).json({ message: { message: "User doesn`t exist", style: "red" } });
         const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
         if (!isPasswordCorrect) return res.status(400).json({ message: { message: 'Invalid Password', style: "red" } });
-        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: '1hr' });
+        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, 
+        //{ expiresIn: '1hr' }
+        );
         res.status(201).json({ result: oldUser, token, message: { message: "Log in Successful", style: "green" } });
     } catch (error) {
         res.status(500).json({ message: { message: 'Something went wrong', style: "red" } });
@@ -63,7 +65,9 @@ const register = async (req, res) => {
         }
         )
 
-        const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: '1hr' });
+        const token = jwt.sign({ email: result.email, id: result._id }, secret, 
+        //{ expiresIn: '1hr' }
+        );
 
         return res.status(201).json({ result, token, message: { message: "Registered Successfully", style: "green" } })
     } catch (error) {
@@ -87,7 +91,9 @@ const googleLogin = async (req, res) => {
     try {
         const oldUser = await User.findOne({ email });
         if (oldUser) {
-            const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: '1hr' })
+            const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, 
+            //{ expiresIn: '1hr' }
+            )
             return res.status(201).json({ result: oldUser, token, message: { message: "Log in Successful", style: "green" } })
         } else {
 

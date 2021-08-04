@@ -1,20 +1,22 @@
 const jwt = require('jsonwebtoken');
-// const { transporter } = require("../mailer");
-// var EmailTemplate = require('email-templates-v2').EmailTemplate;
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const Stock = require("../models/Stock");
+// var EmailTemplate = require('email-templates-v2').EmailTemplate;
 //const { where } = require("../models/Order");
+// const { transporter } = require("../mailer");
 
 const Product = require("./../models/Product");
 const User = require("./../models/User");
+const Cart = require("./../models/Cart");
 const Whishlist = require("./../models/Whishlist");
-
+//===================================================================================//
 // @desc    Fetch all products
 // @route   GET localhost:3001/products
 // @access  Public
+//===================================================================================//
 const getProducts = asyncHandler(async (req, res, next) => {
   const pageSize = req.query.pageSize || 12;
   const page = req.query.page || 1;
@@ -65,10 +67,15 @@ const getProducts = asyncHandler(async (req, res, next) => {
   }
 });
 //===================================================================================//
+// @desc    Fetch a product by Id
+// @route   GET localhost:3001/products/:_id
+// @access  Public
+//===================================================================================//
 const getProductsById = async(req, res) => {
   const { id } = req.params;
   //Initializing a variable that will hold the whishlist bool  
   let isInWhishlist = null;
+  let canReview = null;
   if(req.headers.authorization){
     //Getting token from headers (sent by API axios interceptor)
     const token = req.headers.authorization.split(' ')[1];
@@ -91,8 +98,23 @@ const getProductsById = async(req, res) => {
       } else {
         isInWhishlist = false;
       }
+      //If there is a token decoded, get all Delivered carts to user
+      const prevCarts = await Cart.find({ $and: [{ userId: req.userId }, { state: "Delivered" }]}, async (error, carts) => {
+        if (error) {
+          return res.status(400).json({
+            message: "There was an Error"
+          })
+        }
+        //If there are no delivered carts to this user, canReview is set to false
+        if (!carts.length) canReview = false  
+        else {
+          //If there are delivered carts get items from each delivered cart. 
+          //Then the array gets flattened get each _id
+          //If the id of the product is found canReview is set to true
+          canReview = carts.map((c) => c.items).flat().findIndex((i) => i.productId.equals(id)) > -1;
+        }
+      })
     }
-    //I should add a similar process to check if the user can review the product
   }
 
   Product.findById(id)
@@ -115,13 +137,17 @@ const getProductsById = async(req, res) => {
         productReview: product.productReview,
         genre: product.genre,
         brand: product.brand,
-        isInWhishlist
+        isInWhishlist,
+        canReview
       }
       return res.status(200).json(product);
     });
 };
 //===================================================================================//
-//filtra por brand, size,color,genre
+// @desc    Fetch products by filters
+// @route   GET localhost:3001/products/filters
+// @access  Public
+//===================================================================================//
 const getProductsFilter = (req, res, next) => {
   let filter = req.query.brand || req.query.size || req.query.genre || req.query.price;
   let keyword;
@@ -187,12 +213,13 @@ const getProductsFilter = (req, res, next) => {
     })
 
 }
-
+//===================================================================================//
 // @desc    Create a product
 // @route   POST localhost:3001/products
 // @access  Private/Admin
+//===================================================================================//
 const addProducts = async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const { userId, name, custom, price, brand, description, stock, size, color, categories, genre, productReview } =
       req.body;
@@ -203,7 +230,7 @@ const addProducts = async (req, res) => {
         images.push(req.files[i].filename);
       }
     }
-    console.log(images)
+    // console.log(images)
     let colorArray = color.split(",");
     let sizeArray = size.split(",");
     let stockArray = stock.split(",");
@@ -265,10 +292,11 @@ const imageUpload = (req, res) => {
   res.set({ "Content-Type": "image/png" });
   res.send(getImage);
 };
-
+//===================================================================================//
 // @desc    Update a product
 // @route   PUT localhost:3001/products/:id
 // @access  Private/Admin
+//===================================================================================//
 const updateProducts = asyncHandler(async (req, res) => {
   const {
     name,
@@ -372,10 +400,11 @@ const removeProductStock = asyncHandler(async (req, res) => {
   }
   res.sendStatus(400);
 });
-
+//===================================================================================//
 // @desc    Delete a product by id
 // @route   DELETE localhost:3001/products/:id
 // @access  Private/Admin
+//===================================================================================//
 const deleteProducts = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -393,7 +422,8 @@ const deleteProducts = asyncHandler(async (req, res) => {
     throw new Error("Porduct not found");
   }
 });
-//==========================================================================//
+//===================================================================================//
+//===================================================================================//
 const addDiscount = async(req, res) => {
   const { productId } = req.params;
   const { percentage } = req.body;
@@ -412,7 +442,9 @@ const addDiscount = async(req, res) => {
     return res.status(500).json({message: 'There was an  Error'})
   }
 }
-//==========================================================================//
+//===================================================================================//
+
+//===================================================================================//
 const removeDiscount = async(req, res) => {
   const {productId} = req.params;
   try {
@@ -432,12 +464,55 @@ const removeDiscount = async(req, res) => {
   
   }
 } 
+//===================================================================================//
+//===================================================================================//
+const getRandomDiscount = async(req, res) => {
+  let product = await Product.find({ 'discount.percentage': { $gte: 1 }}, async (error, discountsFound) => {
+        if (error) {
+            return res.status(400).json({
+              message: "There was an Error"
+            })
+        }
+        if (!discountsFound.length) return res.status(200).json({ message: 'There are not any discounts' })
 
-//==========================================================================//
+        if(discountsFound.length > 0){
+          const randomProduct = discountsFound[Math.floor(Math.random() * discountsFound.length)]
+          const {
+            _id,
+            name,
+            discount,
+          } = randomProduct
 
+          return res.status(200).json({message:`There is a ${discount.percentage}% discount on ${name}`, _id});
+        }
+    });
+}
+//===================================================================================//
 
+//===================================================================================//
+const getRandomDiscountByKeyword = async(req, res) => {
+  const { keyword } = req.params;
+  let product = await Product.find({ $and: [{name: { $regex: keyword, $options: "i" } } , {'discount.percentage': { $gte: 1 }}]}, async (error, discountsFound) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was an Error"
+        })
+      }
+      if (!discountsFound.length) return res.status(200).json({ message: 'There are not any matching discounts' })
+      
+      if(discountsFound.length > 0){
+        const randomProduct = discountsFound[Math.floor(Math.random() * discountsFound.length)]
+        const {
+          _id,
+          name,
+          discount,
+        } = randomProduct
 
-//==========================================================================//
+      return res.status(200).json({message:`There is a ${discount.percentage}% discount on ${name}`, _id});
+    }
+  });
+}
+//===================================================================================//
 module.exports = {
   getProducts,
   getProductsFilter,
@@ -449,6 +524,8 @@ module.exports = {
   getProductsById,
   imageUpload,
   addDiscount,
-  removeDiscount
+  removeDiscount,
+  getRandomDiscount,
+  getRandomDiscountByKeyword
 };
 //==========================================================================//

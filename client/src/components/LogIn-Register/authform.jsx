@@ -7,7 +7,7 @@ import Icon from './icon';
 import './authform.css';
 import { login, register, googleLogIn } from '../../redux/actions/authentication_actions';
 import {getProvincias, getMunicipios, getCalles} from '../../redux/actions/addresses_actions'
-import {googleId} from '../../redux/api'
+// import {googleId} from '../../redux/api'
 import Footer from '../../containers/Footer/footer';
 import swal from 'sweetalert';
 
