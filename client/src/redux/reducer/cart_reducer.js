@@ -4,7 +4,7 @@ import * as constants from "../constants";
 const initialState = {
   cart: null,
   cartsList: null,
-  isLoading: false,
+  isLoading: null,
   error: null
 };
 

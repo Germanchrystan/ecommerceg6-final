@@ -4,7 +4,7 @@ import Footer from "../Footer/footer"
 import { useDispatch, useSelector } from "react-redux"
 import { getCartsByUser } from "../../redux/api"
 import { Link } from "react-router-dom"
-
+import Spinner from "./../../containers/Spinner/Spinner";
 
 
 function HistorialCompras(props) {
@@ -13,17 +13,19 @@ function HistorialCompras(props) {
     const [idDeUsuario, setIdDeUsuario] = useState(props.match.params.userId)
 
     async function touch(elemento) {
-        //alert(elemento)
         await setIdCarro(elemento)
         document.getElementById("redirectCarro").click()
     }
 
     function parseDate(input) {
-        console.log("ENTRA AL PARSE INT", input)
         var parts = input.match(/(\d+)/g);
         return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
     }
-    console.log(carritos)
+    
+    const isLoading = useSelector(
+        (state) => state.cartReducer.isLoading
+    )
+
     useEffect(() => {
         getCartsByUser(props.match.params.userId)
             .then(result => result.data)
@@ -62,46 +64,55 @@ function HistorialCompras(props) {
             <div className="mt-20 pt-4 mb-4 flex justify-center">
 
             </div >
+            {
+                isLoading
+                ?
+                (
+                    <Spinner />
+                )
+                :
+                (
+                    <div style={{minHeight:'30em'}} >
+                        <table className="border-collapse w-full">
+                            <thead>
+                                <tr>
+                                    <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Date of Order</th>
+                                    <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Product</th>
+                                    <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Total</th>
+                                    <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    carritos.map((c, id) => {
+                                        return <tr key={id} className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                                            <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                                                {c.fechaCierre && c.fechaCierre.split(".")[0].split("T")[0] + " / " + c.fechaCierre.split(".")[0].split("T")[1]}
+                                            </td>
+                                            <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                                                {c.items.length > 0 && c.items.map(p => {
+                                                    return <p ><Link className="hover:text-blue-500" to={`/product/${p.productId}`}>{p.name} {p.colorName} {p.sizeName}</Link></p>
+                                                })}
+                                            </td>
 
-            <table className="border-collapse w-full">
-                <thead>
-                    <tr>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Date of Order</th>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Product</th>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Total</th>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">State</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        carritos.map((c, id) => {
-                            return <tr key={id} className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                                <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                    {c.fechaCierre && c.fechaCierre.split(".")[0].split("T")[0] + " / " + c.fechaCierre.split(".")[0].split("T")[1]}
-                                </td>
-                                <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                    {c.items.length > 0 && c.items.map(p => {
-                                        return <p ><Link className="hover:text-blue-500" to={`/product/${p.productId}`}>{p.name} {p.colorName} {p.sizeName}</Link></p>
+                                            <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                                ${c.totalAmount}
+                                            </td>
+                                            <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                                {c.state}
+                                            </td>
+                                        </tr>
                                     })}
-                                </td>
-
-                                <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                                    ${c.totalAmount}
-                                </td>
-                                <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                                    {c.state}
-                                </td>
-                            </tr>
-                        })}
 
 
 
-                </tbody>
-            </table>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
             <br></br>
             <div className="flex justify-center mb-4">
-
-
             </div>
             <Footer />
         </div >

@@ -16,6 +16,7 @@ Cart
 
 -Product Controllers to return random discount 
 -Add review button fixed in product detail
+-Address not hardcoded in Cart detail
 --------------------------------------------------------------
 TODO
 
