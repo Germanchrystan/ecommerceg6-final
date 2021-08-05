@@ -1,13 +1,4 @@
-import {
-  ADD_REVIEW,
-  ADD_REVIEW_ERROR,
-  ADD_REVIEW_SUCCESS,
-  GET_ALL_REVIEWS,
-  GET_REVIEW_ERROR,
-  GET_REVIEW_SUCCESS,
-  GET_REVIEWS_ID,
-  FILTER_BY_ID
-} from "../constants";
+import * as constants from "../constants";
 
 const initialState = {
   allReviews: [],
@@ -18,22 +9,28 @@ const initialState = {
 
 const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_REVIEWS:
+    case constants.GET_ALL_REVIEWS:
       return { ...state, allReviews: [], isLoading: true, error: null };
-    case GET_REVIEWS_ID:
+    case constants.GET_REVIEWS_ID:
       return { ...state, allReviews: [], isLoading: true, error: null };
-    case GET_REVIEW_SUCCESS:
+    case constants.GET_REVIEW_SUCCESS:
       return {...state, allReviews: action.payload, isLoading: false, error: null };
-    case GET_REVIEW_ERROR:
+    case constants.GET_REVIEW_ERROR:
       return { ...state, allReviews: [], isLoading: false, error: true };
-    case ADD_REVIEW:
+    case constants.ADD_REVIEW:
       return { ...state, addReview: null, isLoading: true, error: null };
-    case ADD_REVIEW_SUCCESS:
+    case constants.ADD_REVIEW_SUCCESS:
       return {...state, addReview: action.payload, isLoading: false, error: false };
-    case ADD_REVIEW_ERROR:
+    case constants.ADD_REVIEW_ERROR:
       return { ...state, addReview: null, isLoading: false, error: true };
-    case FILTER_BY_ID:
+    case constants.FILTER_BY_ID:
       return { ...state, allReviews: action.payload, isLoading: true, error: null };
+    case constants.GET_USER_REVIEWS:
+      return { ...state, isLoading: true, error: null }
+    case constants.GET_USER_REVIEWS_SUCCESS:
+      return { ...state, allReviews: action.payload, isLoading: false, error:null };
+    case constants.GET_USER_REVIEWS_ERROR:
+      return { ...state, allReviews: null, isLoading: false, error: action.payload }
     default:
       return state;
   }

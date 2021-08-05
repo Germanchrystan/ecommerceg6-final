@@ -10,29 +10,24 @@ import StarRatingComponent from 'react-star-rating-component';
 
 const AddReview = () => {
     const dispatch = useDispatch();
-    const { id } = useParams();
     const history = useHistory()
-    const [user, setUser] =
-        useState(JSON.parse(localStorage.getItem('profile')));
+    const { id } = useParams();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [rate, setRate] = useState(1)
 
     const newReview = {
-        productReview: id,
+        productId: id,
         review: "",
         rating: rate,
         username: user.result._id
-
     };
-    const [review, setReview] = useState(newReview);
-    console.log(newReview)
 
-    // const categoryArray = useSelector(
-    //     (state) => state.categoriesReducer.categories.list.categories
-    // );
+    const [review, setReview] = useState(newReview);
+
     function onStarClick(nextValue, prevValue, name) {
         setRate(nextValue);
     }
-    console.log(rate)
+    
     const handleInputChange = (e) => {
         setReview({
             ...review,
@@ -44,7 +39,7 @@ const AddReview = () => {
 
         e.preventDefault();
         const reviewSend = {
-            productReview: review.productReview,
+            productId: review.productId,
             review: review.review,
             rating: rate,
             username: user.result._id
@@ -62,14 +57,9 @@ const AddReview = () => {
             button: true,
             dangerMode: true,
         })
-        dispatch(addReviews(reviewSend));
         setReview(newReview)
-
-        swal("Good job!", "Well done!", "success", { button: true }).then(function () {
-            // window.location.replace(`https://e-commerce-g6.netlify.app/`)
-            window.location.replace(`http://localhost:3000/product/` + id)
-        });
-        console.log(reviewSend)
+        
+        dispatch(addReviews(reviewSend, history, swal));
     };
     return (
         <div class=" tracking-wide font-bold bg-gray-200">
@@ -106,20 +96,6 @@ const AddReview = () => {
                                             //value={rating}
                                             onStarClick={onStarClick}
                                         />
-                                        {/* <textarea
-                                            onChange={handleInputChange}
-                                            type="text"
-                                            name="rating"
-                                            value={review.rating}
-                                            placeholder="Product rating"
-                                            className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none 
-                                focus:ring focus:ring-indigo-100 
-                                focus:border-indigo-300 dark:bg-gray-700 
-                                dark:text-white dark:placeholder-gray-500 
-                                dark:border-gray-600 dark:focus:ring-gray-900 
-                                dark:focus:border-gray-500" required
-                                        /> */}
-
                                     </div>
                                     <div className="mb-6">
                                         <button type="submit" onClick={handleSubmit} className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">Add</button>

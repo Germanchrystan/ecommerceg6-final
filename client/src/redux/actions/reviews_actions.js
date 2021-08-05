@@ -1,91 +1,106 @@
-import axios from "axios";
+//import axios from "axios";
 import * as api from "../api/index.js";
-import {
-  ADD_REVIEW,
-  ADD_REVIEW_ERROR,
-  ADD_REVIEW_SUCCESS,
-  GET_ALL_REVIEWS,
-  GET_REVIEW_ERROR,
-  GET_REVIEW_SUCCESS,
-  GET_REVIEWS_ID,
-  FILTER_BY_ID,
-} from "../constants";
+import * as constants from "../constants";
 
+//===================================================================================//
 export const getAllReviews = (page) => async (dispatch) => {
   dispatch({
-    type: GET_ALL_REVIEWS,
+    type: constants.GET_ALL_REVIEWS,
   });
   return await api
     .getAllReviews(page)
     .then((res) => {
       dispatch({
-        type: GET_REVIEW_SUCCESS,
+        type: constants.GET_REVIEW_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       dispatch({
-        type: GET_REVIEW_ERROR,
+        type: constants.GET_REVIEW_ERROR,
         payload: err.response,
       });
     });
 };
-
+//===================================================================================//
 export const getReviewsById = (id, page) => async (dispatch) => {
   dispatch({
-    type: GET_REVIEWS_ID,
+    type: constants.GET_REVIEWS_ID,
   });
   return await api
     .getReviewsById(id, page)
     .then((res) => {
       dispatch({
-        type: GET_REVIEW_SUCCESS,
+        type: constants.GET_REVIEW_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       dispatch({
-        type: GET_REVIEW_ERROR,
+        type: constants.GET_REVIEW_ERROR,
         payload: err.response,
       });
     });
 };
-
+//===================================================================================//
 export const filterById = (id) => async (dispatch) => {
   dispatch({
-    type: FILTER_BY_ID,
+    type: constants.FILTER_BY_ID,
   });
   return await api.filterReviewsById(id)
     .then((res) => {
       dispatch({
-        type: FILTER_BY_ID,
+        type: constants.FILTER_BY_ID,
         payload: res.data,
       });
     })
     .catch((err) => {
       dispatch({
-        type: FILTER_BY_ID,
+        type: constants.FILTER_BY_ID,
         payload: err.response,
       });
     });
 };
-
-export const addReviews = (body) => async (dispatch) => {
+//===================================================================================//
+export const addReviews = (body, history, swal) => async (dispatch) => {
   dispatch({
-    type: ADD_REVIEW,
+    type: constants.ADD_REVIEW,
   });
-  return await api
-    .addReviews(body)
-    .then((p) => {
-      dispatch({
-        type: ADD_REVIEW_SUCCESS,
-        payload: p.data,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: ADD_REVIEW_ERROR,
-        payload: err.response,
-      });
+  return await api.addReviews(body)
+  .then((p) => {
+    dispatch({
+      type: constants.ADD_REVIEW_SUCCESS,
+      payload: p.data,
     });
+  })
+  .then(async() => {
+    swal("Good job!", "Well done!", "success", { button: true })
+  })
+  .then(() => history.push("/"))
+  .catch((err) => {
+    dispatch({
+      type: constants.ADD_REVIEW_ERROR,
+      payload: err.response,
+    });
+  });
 };
+//===================================================================================//
+export const getUserReviews = (userId) => async(dispatch) => {
+  dispatch({
+    type: constants.GET_USER_REVIEWS
+  })
+  return await api.getUserReviews(userId)
+  .then((res) => {
+    dispatch({
+      type: constants.GET_USER_REVIEWS_SUCCESS,
+      payload: res.data
+    })
+  })
+  .catch((error) => {
+    dispatch({
+      type: constants.GET_USER_REVIEWS_ERROR,
+      payload: error.response.data
+    })
+  })
+}
+//===================================================================================//

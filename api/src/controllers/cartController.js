@@ -7,6 +7,7 @@ const Cart = require("./../models/Cart");
 const Product = require("./../models/Product");
 //==========================================================================//
 
+//==========================================================================//
 const getActiveCartFromUser = async (req, res) => {
   const { userId } = req.params;
 
@@ -31,6 +32,8 @@ const getActiveCartFromUser = async (req, res) => {
   });
   return res.status(200).json({ cart, totalQuantity: totalQuantity });
 };
+//==========================================================================//
+
 //==========================================================================//
 const addItem = async (req, res) => {
   const { userId } = req.params;
@@ -111,6 +114,8 @@ const addItem = async (req, res) => {
   }
 };
 //==========================================================================//
+
+//==========================================================================//
 const incrementProductUnit = async (req, res) => {
   const { userId } = req.params;
   const { productId, colorName, sizeName } = req.query;
@@ -172,6 +177,8 @@ const incrementProductUnit = async (req, res) => {
   }
 };
 //==========================================================================//
+
+//==========================================================================//
 const decrementProductUnit = async (req, res) => {
   const { userId } = req.params;
   const { productId, colorName, sizeName } = req.query;
@@ -225,6 +232,7 @@ const decrementProductUnit = async (req, res) => {
     return res.status(500).json({ message: "There was an error" });
   }
 };
+//==========================================================================//
 
 //==========================================================================//
 const stateChange = async (req, res) => {
@@ -321,6 +329,8 @@ const stateChange = async (req, res) => {
   }
 };
 //==========================================================================//
+
+//==========================================================================//
 const getAllCarts = asyncHandler(async (req, res) => {
   const pageSize = req.query.pageSize || 15;
   const page = req.query.page || 1;
@@ -359,6 +369,7 @@ const getAllCarts = asyncHandler(async (req, res) => {
     }
   return res.json({ carts,totalQuantity:quantityArray ,current: page, pages: Math.ceil(count / pageSize) });
 });
+//==========================================================================//
 
 //==========================================================================//
 const getCartsByUser = async (req, res) => {
@@ -373,6 +384,8 @@ const getCartsByUser = async (req, res) => {
     .skip(pageSize * (page - 1));
   return res.json({ carts, current: page, pages: Math.ceil(count / pageSize) });
 };
+//==========================================================================//
+
 //==========================================================================//
 const removeProductFromCart = async (req, res) => {
   const { userId } = req.params;
@@ -409,6 +422,7 @@ const removeProductFromCart = async (req, res) => {
 };
 //==========================================================================//
 
+//==========================================================================//
 const getCartsById = async (req, res) => {
   const { _id } = req.params;
   const pageSize = req.query.pageSize || 15;
@@ -421,6 +435,7 @@ const getCartsById = async (req, res) => {
     .skip(pageSize * (page - 1));
   return res.json({ carts, current: page, pages: Math.ceil(count / pageSize) });
 };
+//==========================================================================//
 
 //==========================================================================//
 function sendEmail (obj) {

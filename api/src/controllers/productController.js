@@ -9,7 +9,7 @@ const Stock = require("../models/Stock");
 // const { transporter } = require("../mailer");
 
 const Product = require("./../models/Product");
-const User = require("./../models/User");
+//const User = require("./../models/User");
 const Cart = require("./../models/Cart");
 const Whishlist = require("./../models/Whishlist");
 //===================================================================================//
@@ -62,7 +62,6 @@ const getProducts = asyncHandler(async (req, res, next) => {
     res.json({ products, current: page, pages: Math.ceil(count / pageSize), keyword: true });
   }
   else {
-    // console.log("ASDSAD",products)
     res.json({ products, current: page, pages: Math.ceil(count / pageSize), keyword: false });
   }
 });
@@ -355,10 +354,12 @@ const updateProducts = asyncHandler(async (req, res) => {
     res.json(updateProduct);
   } else {
     res.status(404);
-    throw new Error("Porduct not found");
+    throw new Error("Product not found");
   }
 });
+//===================================================================================//
 
+//===================================================================================//
 const updateStock = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { quantity, state, color, size, productId } = req.body;
