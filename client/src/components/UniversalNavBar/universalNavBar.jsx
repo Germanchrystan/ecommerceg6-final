@@ -104,15 +104,15 @@ export default function UniversalNavBar(props) {
         )}
         <ul className="menu">  
         {/* style={{position:'relative', top:'10%', right:0}} */}
-          <li className="header-menu-item">
+          <li style={{fontFamily: "'Josefin Sans', sans-serif"}} className="header-menu-item">
             <Link to="/Shop">Shop</Link>
           </li>
           {user?.result?.username ? (
-            <li className="header-menu-item">
+            <li style={{fontFamily: "'Josefin Sans', sans-serif"}} className="header-menu-item">
               <Link to="/myProfile">{user.result.username}</Link>
             </li>
           ) : (
-            <li className="header-menu-item">
+            <li style={{fontFamily: "'Josefin Sans', sans-serif"}} className="header-menu-item">
               <Link to="/auth">Log In</Link>
             </li>
           )}

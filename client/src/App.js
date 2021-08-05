@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 const theme = {
   background: '#f5f8fb',
-  fontFamily: 'Arial',
+  fontFamily: 'Josefin Sans',
   headerBgColor: '#2586E8',
   headerFontColor: '#fff',
   headerFontSize: '15px',

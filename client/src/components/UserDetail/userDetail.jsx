@@ -68,7 +68,7 @@ export default function UserDetail() {
                             <div id="profile" className="w-full  rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
                                 <div className="p-4 md:p-12  text-center lg:text-left">
                                     {/* <!-- Image for mobile view--> */}
-                                    <h1 className="text-3xl text-center font-bold pt-8 lg:pt-0">  {(user.result) ? user.result.username : ""}'s Profile</h1>
+                                    <h1 style={{fontFamily: "'Josefin Sans', sans-serif", fontWeight:"300"}} className="text-3xl text-center font-bold pt-8 lg:pt-0">  {(user.result) ? user.result.username : ""}'s Profile</h1>
                                     <div className="mx-auto lg:mx-0 w-5/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
                                     <p className=" text-base font-bold  lg:justify-start"><svg className="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"></svg>👤 Name: {(userData) ? userData?.firstname : ""}</p>
                                     <p className=" text-base font-bold  lg:justify-start"><svg className="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"></svg>👤 Surname: {(userData) ? userData?.lastname : ""}</p>

@@ -46,7 +46,7 @@ export default function Home() {
           </div>
           <div class="w-full p-6 pb-12 md:p-12 md:w-5/12 flex justify-center items-center relative">
             <div class="w-full relative text-center py-12 px-12 md:p-0 md:text-right">
-              <h1 class="text-5xl mb-4">AdaLov Clothes</h1>
+              <h1 class="text-5xl mb-4"><span style={{fontFamily:"'Great Vibes', cursive", fontSize:"1.8em"}}>A</span>daLov <span style={{fontWeight:"200"}}>Clothes</span></h1>
               {/* <h2 class="text-2xl mb-4">Ut vel nunc a est auctor lacinia.</h2> */}
               <p class="leading-loose tracking-wide text-gray-700">Sport keeps us fit. It keeps you attentive. It unites us. Through sport we can change lives. Whether it's through inspiring athlete stories. Encouraging you to get going.</p>
               <br />

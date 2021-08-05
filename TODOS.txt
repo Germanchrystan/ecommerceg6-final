@@ -18,6 +18,8 @@ Cart
 -Add review button fixed in product detail
 -Address not hardcoded in Cart detail
 --------------------------------------------------------------
+
+--------------------------------------------------------------
 TODO
 
 High Priority
