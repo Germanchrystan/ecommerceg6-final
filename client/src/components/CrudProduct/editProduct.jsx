@@ -7,7 +7,7 @@ import "../Catalog/catalog.css";
 import swal from 'sweetalert';
 import UniversalNavBar from "../UniversalNavBar/universalNavBar";
 import Footer from "../../containers/Footer/footer";
-
+import Spinner from "./../../containers/Spinner/Spinner";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -19,7 +19,10 @@ const EditProduct = () => {
   const categoryPreview = useSelector(
     (state) => state.categoriesReducer.categories.category);
   const productPreview = useSelector(
-    (state) => state.productsReducer.allProducts);
+    (state) => state.productsReducer?.allProducts);
+  const isLoading = useSelector(
+    (state) => state.productsReducer.isLoading
+  )
 
   useEffect(() => {
     dispatch(getCategories());
@@ -198,6 +201,11 @@ const EditProduct = () => {
   return (
     <div className="tracking-wide font-bold">
       <UniversalNavBar />
+      {
+        isLoading ? 
+        (<Spinner />)
+        :
+        (
 
       <div className="grid grid-cols-2 gap-2 bg-gray-200 mt-20">
         <div className="flex items-center min-h-screen bg-gray-200 dark:bg-gray-900">
@@ -231,8 +239,8 @@ const EditProduct = () => {
                     <select id="selectColorName" onChange={(e) => handleStock(e)} className="mr-4">
                       <option>Select</option>
                       {
-                        productPreview.stock && productPreview.stock.length > 0 &&
-                        productPreview.stock.map((prop, id) => {
+                        productPreview?.stock && productPreview.stock.length > 0 &&
+                        productPreview.stock?.map((prop, id) => {
                           return <option key={id} >{prop.colorName}</option>
                         })
                       }
@@ -240,16 +248,16 @@ const EditProduct = () => {
                     <select onChange={(e) => handleStock(e)} id="selectSizeName" className="mr-4">
                       <option>Select</option>
                       {
-                        productPreview.stock && productPreview.stock.length > 0 &&
-                        productPreview.stock.map((prop, id) => {
+                        productPreview?.stock && productPreview.stock.length > 0 &&
+                        productPreview.stock?.map((prop, id) => {
                           return <option key={id}>{prop.sizeName}</option>
                         })
                       }
                     </select>
                     <select onChange={(e) => handleStock(e)} id="selectStock" className="mr-2">
                       <option>Select</option>{
-                        productPreview.stock && productPreview.stock.length > 0 &&
-                        productPreview.stock.map((prop, id) => {
+                        productPreview?.stock && productPreview.stock.length > 0 &&
+                        productPreview.stock?.map((prop, id) => {
                           return <option key={id}>{prop.stock}</option>
                         })
                       } </select>
@@ -447,15 +455,15 @@ const EditProduct = () => {
                 <div className=" justify-center justify-items-center content-center items-center">
                   <div className="card flex justify-center">
                     <img
-                      src={`http://localhost:3001/products/image/${productPreview.img}`}
+                      src={`http://localhost:3001/products/image/${productPreview?.img}`}
                       alt="https://i.stack.imgur.com/y9DpT.jpg"
                       style={{ height: "200px", width: "250px" }}
                     />
                     <div className="bg-gray-200" style={{ height: "1px" }}></div>
                     <div className="p-4">
-                      <p className="text-black">{productPreview.name}</p>
-                      <p className="text-blue-300">${productPreview.price}</p>
-                      <p className="text-blue-300">{productPreview.brand}</p>
+                      <p className="text-black">{productPreview?.name}</p>
+                      <p className="text-blue-300">${productPreview?.price}</p>
+                      <p className="text-blue-300">{productPreview?.brand}</p>
                       <div>
                         {/* {productPreview.categories && productPreview.categories.length > 0 ?
                           productPreview.categories.map((category,key)=>
@@ -512,6 +520,8 @@ const EditProduct = () => {
         {/* FIN DE CARD ORIGINAL */}
 
       </div>
+        )
+      }
       <Footer />
     </div>
   )

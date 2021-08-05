@@ -38,7 +38,7 @@ const ProductPostForm = () => {
   };
   const [product, setProduct] = useState(newProduct);
   const [selectedName, setSelectedName] = useState({ categoryName: [] });
-  const [stockNum, setStockNum] = useState(1);
+  const [stockNum, setStockNum] = useState();
 
   const handleInputChange = (e) => {
     setProduct({
@@ -135,7 +135,7 @@ const ProductPostForm = () => {
 
   };
   const handleStockChange = (e) => {
-    setStockNum(Math.max(1, e.target.value))
+    setStockNum(e.target.value === undefined ? undefined : Math.max(1, e.target.value))
   }
   const handleSubmit = (e) => {
     e.preventDefault();
