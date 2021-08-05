@@ -42,11 +42,11 @@ const Whishlist = () => {
             (<Spinner />)
             :(
                 <div>
-                    <div className="bg-gray-200 text-lg flex justify-center tracking-wide pt-10 content-center font-bold">
+                    <div className="bg-gray-200 text-lg flex justify-center tracking-wide pt-2 content-center font-bold">
                         <h1>Your Whishlist</h1>
-                        <hr/>
+                        
                     </div> 
-                    <div  className="bg-gray-200 tracking-wide pt-10 pb-10 font-bold">
+                    <div style={{minHeight:'30em'}} className="bg-gray-200 tracking-wide pt-10 pb-10 font-bold">
                     {whishlistData?.products.length > 0 ? (
                     whishlistData?.products.map((w, index) => (
                         <div
@@ -84,8 +84,8 @@ const Whishlist = () => {
                         </div>
                     ))
                     ) : (
-                    <div className="mb-70 bg-gray-200">
-                        <p><br/><br/><br/><br/><br/>There are no products in your whishlist</p>
+                    <div style={{minHeight:'30em'}} className="mb-7 bg-gray-200">
+                        <p>There are no products in your whishlist</p>
                     </div>
                     )}
                 </div>

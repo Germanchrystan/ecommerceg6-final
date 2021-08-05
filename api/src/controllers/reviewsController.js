@@ -43,6 +43,10 @@ res.json({ reviews});
 const addReviews = async (req, res) => {
     try {
         const{ productReview, username, review, rating } = req.body;
+
+        //Check If there is a review by the same user on the same product first
+        
+
         const reviews = new Review({
             _id: new mongoose.Types.ObjectId(),
             productReview: productReview,

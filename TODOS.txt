@@ -18,17 +18,24 @@ Cart
 -Add review button fixed in product detail
 --------------------------------------------------------------
 TODO
--Add Tags
+
+High Priority
+-Let the chatbot show a random discount (CORRECT)
+-Move Filter Bar to the Side
 -Link Brand Model with products
+-Add Tags
+
 
 Discounts
 -Fixing the front of the discount removal
--Let the chatbot show a random discount (CORRECT)
 
 FrontEnd
 - Check Whishlist Reducer.
-- Move Filter Bar to the Side
 - Change Catalog from grid to flex
+
+Reviews
+- If the user already review this product, the review should be displayed for edition.
+
 
 -Add useHistory to action in categorypost(REPLACE HARDCODED ROUTE!)
 

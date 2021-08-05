@@ -2,18 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
 import { getCategories } from "./../../redux/actions/category_actions";
+import { getBrands } from "./../../redux/actions/brand_actions";
 import { addProducts } from "./../../redux/actions/products_actions";
 import "../Catalog/catalog.css";
 import swal from 'sweetalert'
 
 const ProductPostForm = () => {
   const dispatch = useDispatch();
+
   const categoryArray = useSelector(
     (state) => state.categoriesReducer.categories.list.categories
   );
 
+  const brandArray = useSelector(
+    (state) => state.brandReducer.allBrands
+  )
+
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getBrands());
   }, []);
 
   const newProduct = {
@@ -31,6 +38,7 @@ const ProductPostForm = () => {
   };
   const [product, setProduct] = useState(newProduct);
   const [selectedName, setSelectedName] = useState({ categoryName: [] });
+  const [stockNum, setStockNum] = useState(1);
 
   const handleInputChange = (e) => {
     setProduct({
@@ -96,7 +104,7 @@ const ProductPostForm = () => {
         filterStock.push(product.stock[i]);
       }
     })
-    // console.log("entra", product)
+    
     setProduct({ ...product, color: filterColor, size: filterSize, stock: filterStock });
   }
   const deleteSize = (e) => {
@@ -126,6 +134,9 @@ const ProductPostForm = () => {
     setImgUrl(URL.createObjectURL(event.target.files[0]));
 
   };
+  const handleStockChange = (e) => {
+    setStockNum(Math.max(1, e.target.value))
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     const fd = new FormData();
@@ -276,7 +287,7 @@ const ProductPostForm = () => {
                     <option>XXL</option>
                   </select>
                   {/* <input id="size" placeholder="Size" className="w-20 px-3 py-2 ml-4 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" /> */}
-                  <input id="stock" placeholder="Stock" type="number" className="w-24 px-3 py-2 ml-4 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                  <input id="stock" value={stockNum} onChange={handleStockChange} placeholder="Stock" type="number" className="w-24 px-3 py-2 ml-4 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
 
                   <button type="button" onClick={handleMultipleInput} className="ml-4">+</button><br />
                   {product.color && product.color.length > 0 &&

@@ -1,8 +1,10 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
-require("dotenv").config();
 const User = require('./../models/User');
 const secret = process.env.JWT_SECRET;
+require("dotenv").config();
+
+//==========================================================================//
 
 //==========================================================================//
 const login = async (req, res) => {
@@ -24,6 +26,8 @@ const login = async (req, res) => {
         res.status(500).json({message:{message:'Something went wrong', style:"red"}});
     }
 }
+//==========================================================================//
+
 //==========================================================================//
 const register = async (req, res) => {
     const {
@@ -76,6 +80,8 @@ const register = async (req, res) => {
     }
 }
 //==========================================================================//
+
+//==========================================================================//
 const googleLogin = async (req, res) => {
     const {
         username,
@@ -118,6 +124,8 @@ const googleLogin = async (req, res) => {
     }
 }
 //==========================================================================//
+
+//==========================================================================//
 const getUsers = async (req, res, next) => {
     const pageSize = req.query.pageSize || 15;
     const page = req.query.page || 1;
@@ -139,6 +147,8 @@ const getUsers = async (req, res, next) => {
 
     res.json({ users, current: page, pages: Math.ceil(count / pageSize) });
 };
+//==========================================================================//
+
 //==========================================================================//
 const updateUser = async(req,res) => {
     const {_id} = req.params;
@@ -177,6 +187,8 @@ const updateUser = async(req,res) => {
     });
 }
 //==========================================================================//
+
+//==========================================================================//
 const deleteUser = async (req, res) => {
     const { _id } = req.params;
 
@@ -184,6 +196,8 @@ const deleteUser = async (req, res) => {
     const number = result.deletedCount;
     return res.status(200).json({ message: { message: `${number} User Removed`, style: "green" } });
 }
+//==========================================================================//
+
 //==========================================================================//
 const toggleAdmin = async (req, res) => {
 
@@ -206,12 +220,16 @@ const toggleAdmin = async (req, res) => {
     });
 }
 //==========================================================================//
+
+//==========================================================================//
 const getUserById = async (req, res) => {
     const { _id } = req.params;
     const userFound = await User.findOne({ _id });
     if (!userFound) return res.status(404).json({});
     return res.status(200).json({ userFound });
 }
+//==========================================================================//
+
 //==========================================================================//
 const changePassword = async (req, res) => {
     const { _id } = req.params;
@@ -240,6 +258,8 @@ const changePassword = async (req, res) => {
         }
     )
 }
+//==========================================================================//
+
 //==========================================================================//
 const addAddress = async (req, res) => {
     console.log(req.cookies)
@@ -273,6 +293,8 @@ const addAddress = async (req, res) => {
     })
 }
 //==========================================================================//
+
+//==========================================================================//
 const removeAddress = async (req, res) => {
     const { _id } = req.params;
     const { addressId } = req.body;
@@ -298,6 +320,7 @@ const removeAddress = async (req, res) => {
 }
 //==========================================================================//
 
+//==========================================================================//
 const addUser = async (req, res) => {
     const { _id, userId } = req.params;
    
@@ -325,6 +348,7 @@ const addUser = async (req, res) => {
 }
 //==========================================================================//
 
+//==========================================================================//
 const deleteUserAdded  = async(req,res) => {
     const {_id,userId} = req.params;
     try {
@@ -347,6 +371,7 @@ const deleteUserAdded  = async(req,res) => {
         res.sendStatus(500)
     }
 }
+//==========================================================================//
 module.exports = {
     login,
     register,
